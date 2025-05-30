@@ -1,33 +1,149 @@
- <section class="section-2">
-     <div class="container">
-         <div class="row">
-             <div class="col-lg-3">
-                 <div class="box shadow-lg">
-                     <div class="fa icon fa-check text-primary m-0 mr-3"></div>
-                     <h2 class="font-weight-semi-bold m-0">Quality Product</h5>
-                 </div>
-             </div>
-             <div class="col-lg-3 ">
-                 <div class="box shadow-lg">
-                     <div class="fa icon fa-shipping-fast text-primary m-0 mr-3"></div>
-                     <h2 class="font-weight-semi-bold m-0">Free Shipping</h2>
-                 </div>
-             </div>
-             <div class="col-lg-3">
-                 <div class="box shadow-lg">
-                     <div class="fa icon fa-exchange-alt text-primary m-0 mr-3"></div>
-                     <h2 class="font-weight-semi-bold m-0">14-Day Return</h2>
-                 </div>
-             </div>
-             <div class="col-lg-3 ">
-                 <div class="box shadow-lg">
-                     <div class="fa icon fa-phone-volume text-primary m-0 mr-3"></div>
-                     <h2 class="font-weight-semi-bold m-0">24/7 Support</h5>
-                 </div>
-             </div>
-         </div>
-     </div>
- </section>
+<section class="section-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="box shadow-lg">
+                    <div class="fa icon fa-gavel text-primary m-0 mr-3"></div>
+                    <h2 class="font-weight-semi-bold m-0">Verified Auctions</h2>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="box shadow-lg">
+                    <div class="fa icon fa-car text-primary m-0 mr-3"></div>
+                    <h2 class="font-weight-semi-bold m-0">Wide Car Range</h2>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="box shadow-lg">
+                    <div class="fa icon fa-clock text-primary m-0 mr-3"></div>
+                    <h2 class="font-weight-semi-bold m-0">Real-Time Bidding</h2>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="box shadow-lg">
+                    <div class="fa icon fa-headset text-primary m-0 mr-3"></div>
+                    <h2 class="font-weight-semi-bold m-0">Customer Support</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-3">
+    <div class="container">
+        <div class="section-title">
+            <h2>Auction Categories</h2>
+        </div>
+        <div class="row pb-3">
+            <div class="col-lg-3">
+                <div class="cat-card">
+                    <div class="left">
+                        <img src="https://source.unsplash.com/400x300/?suv,car" alt="SUV" class="img-fluid">
+                    </div>
+                    <div class="right">
+                        <div class="cat-data">
+                            <h2>SUVs</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cat-card">
+                    <div class="left">
+                        <img src="https://source.unsplash.com/400x300/?sedan,car" alt="Sedan" class="img-fluid">
+                    </div>
+                    <div class="right">
+                        <div class="cat-data">
+                            <h2>Sedans</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cat-card">
+                    <div class="left">
+                        <img src="https://source.unsplash.com/400x300/?truck,car" alt="Truck" class="img-fluid">
+                    </div>
+                    <div class="right">
+                        <div class="cat-data">
+                            <h2>Trucks</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cat-card">
+                    <div class="left">
+                        <img src="https://source.unsplash.com/400x300/?luxury,car" alt="Luxury" class="img-fluid">
+                    </div>
+                    <div class="right">
+                        <div class="cat-data">
+                            <h2>Luxury Cars</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-4 pt-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Featured Auction Cars</h2>
+        </div>
+        <div class="row pb-3">
+            @for ($i = 1; $i <= 4; $i++)
+                <div class="col-md-3">
+                    <div class="card product-card" style="height: 420px; overflow: hidden;">
+                        <div class="product-image position-relative" style="height: 250px;">
+                            <a href="#" class="product-img" style="display: block; height: 100%; width: 100%;">
+                                <img src="https://source.unsplash.com/400x300/?car,auction,{{ $i }}" alt="Auction Car {{ $i }}"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </a>
+                            <div class="badge bg-success position-absolute top-0 start-0 m-2">LIVE</div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Car Model {{ $i }}</h5>
+                            <p class="text-muted mb-1">Starts at: <strong>₨ {{ 100000 * $i }}</strong></p>
+                            <p class="text-danger">Current Bid: <strong>₨ {{ 100000 * $i + 20000 }}</strong></p>
+                            <a href="#" class="btn btn-primary mt-2">Bid Now</a>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        </div>
+    </div>
+</section>
+
+<section class="section-4 pt-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Latest Auction Listings</h2>
+        </div>
+        <div class="row pb-3">
+            @for ($i = 5; $i <= 8; $i++)
+                <div class="col-md-3">
+                    <div class="card product-card" style="height: 420px; overflow: hidden;">
+                        <div class="product-image position-relative" style="height: 250px;">
+                            <a href="#" class="product-img" style="display: block; height: 100%; width: 100%;">
+                                <img src="https://source.unsplash.com/400x300/?car,vehicle,{{ $i }}" alt="Auction Car {{ $i }}"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </a>
+                            <div class="badge bg-info position-absolute top-0 start-0 m-2">NEW</div>
+                        </div>
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Car Model {{ $i }}</h5>
+                            <p class="text-muted mb-1">Starts at: <strong>₨ {{ 150000 * $i }}</strong></p>
+                            <p class="text-danger">Current Bid: <strong>₨ {{ 150000 * $i + 30000 }}</strong></p>
+                            <a href="#" class="btn btn-outline-primary mt-2">Place Your Bid</a>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        </div>
+    </div>
+</section>
+
  <section class="section-3">
      <div class="container">
          <div class="section-title">
