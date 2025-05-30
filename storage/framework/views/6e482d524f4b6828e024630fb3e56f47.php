@@ -1,0 +1,1 @@
+<h1>my appointment</h1><?php /**PATH C:\xampp\htdocs\laravel2\resources\views/admin/myappointment.blade.php ENDPATH**/ ?>

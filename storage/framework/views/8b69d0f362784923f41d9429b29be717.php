@@ -1,0 +1,1 @@
+<h1>dfjcklhsdjfh</h1><?php /**PATH C:\xampp\htdocs\laravel2\resources\views/light_admin/update_admin.blade.php ENDPATH**/ ?>
