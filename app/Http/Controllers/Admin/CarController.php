@@ -42,12 +42,13 @@ class CarController extends Controller
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('admin.cars.index')->with(['success', 'Car added successfully.' , 'status', 'success']);
+        return redirect()->route('admin.cars.index')->with(['message', 'Car added successfully.' , 'status', 'success']);
     }
 
     public function show(Car $car)
     {
-        return view('admin.cars.show', compact('car'));
+    
+        return view('admin.cars.view', compact('car'));
     }
 
     public function edit(Car $car)
@@ -58,6 +59,7 @@ class CarController extends Controller
     public function update(Request $request, Car $car)
     {
         $request->validate([
+            'name' => 'required',
             'make' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer',
@@ -72,9 +74,9 @@ class CarController extends Controller
             $car->image = $request->file('image')->store('cars', 'public');
         }
 
-        $car->update($request->only(['make', 'model', 'year', 'description', 'image']));
+        $car->update($request->only(['name','make', 'model', 'year', 'description', 'image' , 'status']));
 
-        return redirect()->route('cars.index')->with('success', 'Car updated successfully.');
+        return redirect()->route('admin.cars.index')->with(['message', 'Car updated successfully.' , 'status', 'success']);
     }
 
     public function destroy(Car $car)
@@ -85,5 +87,18 @@ class CarController extends Controller
 
         $car->delete();
         return redirect()->route('cars.index')->with('success', 'Car deleted successfully.');
+    }
+     public function status(Request $request)
+    {
+        $user = Car::find($request->user_id);
+        if ($user == null) {
+            return response()->json(['status' => 'error', 'message' => 'data not found.']);
+        }
+        Car::where('id', $request->id)->update(['status' => $request->status]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Status changed successfully.'
+        ]);
     }
 }

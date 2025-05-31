@@ -6,11 +6,11 @@
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="py-3 mb-2">
-            <span class="text-muted fw-light">Users /</span> Edit
+            <span class="text-muted fw-light">Cars /</span> Edit
         </h4>
         <div class="row mb-2">
             <div class="col-lg-12">
-                <a href="{{ route('admin.listUsers') }}" class="btn btn-primary float-end">Back</a>
+                <a href="{{ route('admin.cars.index') }}" class="btn btn-primary float-end">Back</a>
             </div>
         </div>
         <div class="row">
@@ -18,94 +18,74 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form role="form" action="{{ route('admin.updateUser') }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="post" enctype="multipart/form-data">
-                            {{csrf_field()}}
+                        <form role="form" action="{{ route('admin.cars.update', $car->id ) }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="PATCH" enctype="multipart/form-data">
+                            @csrf
 
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">Name <span class="steric">*</span></label>
-                                <input type="text" name="name" id="name"
-                                       class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
-                                       placeholder="Enter Name" value="{{ $user->name ?? old('name') }}">
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
+                            <div class="col-sm-6">
+                                <label class="form-label">Car Name <span class="steric">*</span></label>
+                                <input type="text" name="name" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                       placeholder="Enter Car Name" value="{{ $car->name ?? old('name') }}">
+                                @error('name')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="form-label">Make <span class="steric">*</span></label>
+                                <input type="text" name="make" class="form-control {{ $errors->has('make') ? 'is-invalid' : '' }}"
+                                       placeholder="Enter Make" value="{{ $car->make ?? old('make') }}">
+                                @error('make')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="form-label">Model <span class="steric">*</span></label>
+                                <input type="text" name="model" class="form-control {{ $errors->has('model') ? 'is-invalid' : '' }}"
+                                       placeholder="Enter Model" value="{{ $car->model ?? old('model') }}">
+                                @error('model')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="form-label">Year <span class="steric">*</span></label>
+                                <input type="text" name="year" class="form-control {{ $errors->has('year') ? 'is-invalid' : '' }}"
+                                       placeholder="Enter Year" value="{{ $car->year ?? old('year') }}">
+                                @error('year')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label class="form-label">Description</label>
+                                <textarea name="description" class="form-control" rows="3">{{ $car->description ?? old('description') }}</textarea>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label class="form-label">Image</label>
+                                <input type="file" name="image" class="form-control">
+                                @if($car->image)
+                                    <img src="{{ asset('uploads/cars/' . $car->image) }}" width="100" class="mt-2" />
                                 @endif
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">Email <span class="steric">*</span></label>
-                                <input type="email" name="email" id="email"
-                                       class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                       placeholder="Enter Email" value="{{ $user->email ?? old('email') }}" disabled>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">Phone No. <span class="steric"></span></label>
-                                <input type="text" name="phone" id="phone"
-                                       class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
-                                       placeholder="Enter Phone Number" value="{{ $user->phone ?? old('phone') }}">
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">User Type <span class="steric">*</span></label>
-                                 <select name="user_type" id="user_role" class="form-control select">
-                                    <option value="">Select Type</option>
-                                    <option value="1" {{ $user->user_type == 1 ? 'selected' : '' }}> Admin</option>
-                                    <option value="0" {{ $user->user_type == 0 ? 'selected' : '' }}>User</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
-                                <label class="form-label">Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="password" name="password" placeholder="············">
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                </div>
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
-                                <label class="form-label">Confirm Password</label>
-                                <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="confirm_password" name="confirm_password" placeholder="············">
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                </div>
-                                @if ($errors->has('confirm_password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('confirm_password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
+                            <div class="col-sm-6">
                                 <label class="form-label">Status</label>
                                 <div>
-                                    @if ($user->status == 0)
-                                        <input name="is_active" type="checkbox" class="" data-toggle="toggle">
-                                        <input type="hidden" name="is_active" id="is_active" value="{{$user->status}}">
+                                    @if ($car->status == 0)
+                                        <input name="is_active" type="checkbox" data-toggle="toggle">
+                                        <input type="hidden" name="is_active" id="is_active" value="0">
                                     @else
-                                        <input name="is_active" type="checkbox" class="" checked data-toggle="toggle">
-                                        <input type="hidden" name="is_active" id="is_active" value="{{$user->status}}">
+                                        <input name="is_active" type="checkbox" checked data-toggle="toggle">
+                                        <input type="hidden" name="is_active" id="is_active" value="1">
                                     @endif
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <input type="hidden" name="id" id="id" class="form-control" value="{{ $user->id }}">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <input type="hidden" name="id" value="{{ $car->id }}">
+                                <button type="submit" class="btn btn-primary">Update Car</button>
                             </div>
                         </form>
                     </div>
@@ -113,18 +93,13 @@
             </div>
             <!-- /FormValidation -->
         </div>
-
     </div>
 @endsection
+
 @section('script')
     <script>
-        $('input[name="is_active"]').change(function() {
-            if ($(this).is(":checked")) {
-                $('input#is_active').val('1');
-            } else {
-                $('input#is_active').val('0');
-            }
+        $('input[name="is_active"]').change(function () {
+            $('#is_active').val($(this).is(':checked') ? '1' : '0');
         });
     </script>
 @endsection
-
