@@ -19,7 +19,7 @@ class CategoryController extends Controller
              $categoryOne = $categoryOne->where('name','like','%'. $request->get('keyword').'%');
         }
         $categoryOne = $categoryOne->paginate(10);
-        return view("admin.pages.category", compact('categoryOne'));
+        return view("admin.city.index", compact('categoryOne'));
     }
 
     /**

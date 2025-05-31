@@ -108,7 +108,7 @@
       .spinner {
         width: 60px;
         height: 60px;
-        border: 6px solid #FFD700; /* Yellow border */
+        border: 6px solidrgb(255, 217, 0); /* Yellow border */
     border-top: 6px solid transparent;
         border-radius: 50%;
         animation: spin 1s linear infinite;

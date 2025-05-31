@@ -36,7 +36,7 @@ class HomeController extends Controller
                 // dd(session()->all());
                 Session::flash('status', 'success');
                 Session::flash('message', 'You are logged in!');
-                return redirect()->route('Dashboard');
+                return redirect()->route('admin.dashboard');
             }
         } 
         else {

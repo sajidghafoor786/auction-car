@@ -47,9 +47,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // Login and Logout Routes...
 
 // admin deshboard route in whitch  isAdmin middleware 
-Route::middleware(['isAdmin'])->group(function () {
-    // Define your admin routes here
-    Route::get('/Dashboard', [AdminController::class, 'index'])->name('Dashboard');
+Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
+    // Define admin routes 
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
     //  category Route 
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::POST('/category/create', [CategoryController::class, 'create'])->name('category.create');
