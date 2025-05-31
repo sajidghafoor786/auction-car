@@ -58,18 +58,18 @@
                             </div>
 
                                <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">User Role <span class="steric">*</span></label>
-                                 <select name="user_role" id="user_role" class="form-control select">
-                                    <option value="">Select Role</option>
-                                    <option value="1" {{ $user->user_role == 1 ? 'selected' : '' }}> Admin</option>
-                                    <option value="0" {{ $user->user_role == 0 ? 'selected' : '' }}>User</option>
+                                <label class="form-label"> User Type <span class="steric">*</span></label>
+                                 <select name="user_type" id="user_role" class="form-control select">
+                                    <option value="" selected>Select Type</option>
+                                    <option value="1" > Admin</option>
+                                    <option value="0" >User</option>
                                 </select>
                             </div>
 
                             <div class="mb-3 col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
                                 <label class="form-label">Password <span class="steric">*</span></label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="password" name="password" placeholder="············">
+                                    <input class="form-control" name="password" type="password" id="password" value="{{ old('password') }}"  placeholder="············">
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                                 @if ($errors->has('password'))
@@ -82,7 +82,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
                                 <label class="form-label">Confirm Password <span class="steric">*</span></label>
                                 <div class="input-group input-group-merge">
-                                    <input class="form-control" type="password" id="confirm_password" name="confirm_password" placeholder="············">
+                                    <input class="form-control" value="{{ old('confirm_password') }}" type="password" id="confirm_password" name="confirm_password" placeholder="············">
                                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                                 </div>
                                 @if ($errors->has('confirm_password'))

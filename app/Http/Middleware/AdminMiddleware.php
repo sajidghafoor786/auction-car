@@ -20,7 +20,7 @@ class AdminMiddleware
       
         if (Auth::check()) {
 
-            if (Auth::user() &&  Auth::user()->usertype == '1') {
+            if (Auth::user() &&  Auth::user()->user_type == '1') {
                 return $next($request);
             }
             else {

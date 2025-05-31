@@ -57,11 +57,11 @@
                                 @endif
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">User Role <span class="steric">*</span></label>
-                                 <select name="user_role" id="user_role" class="form-control select">
-                                    <option value="">Select Role</option>
-                                    <option value="1" {{ $user->user_role == 1 ? 'selected' : '' }}> Admin</option>
-                                    <option value="0" {{ $user->user_role == 0 ? 'selected' : '' }}>User</option>
+                                <label class="form-label">User Type <span class="steric">*</span></label>
+                                 <select name="user_type" id="user_role" class="form-control select">
+                                    <option value="">Select Type</option>
+                                    <option value="1" {{ $user->user_type == 1 ? 'selected' : '' }}> Admin</option>
+                                    <option value="0" {{ $user->user_type == 0 ? 'selected' : '' }}>User</option>
                                 </select>
                             </div>
                             <div class="mb-3 col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">

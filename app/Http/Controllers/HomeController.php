@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         //  ----------  Auth ---------
         if (Auth::id()) {
-            if (Auth::user()->usertype == '0') {
+            if (Auth::user()->user_type == '0') {
                 Session::flash('status', 'success');
                 Session::flash('message', 'You are logged in!');
                 return redirect()->route('user.home');

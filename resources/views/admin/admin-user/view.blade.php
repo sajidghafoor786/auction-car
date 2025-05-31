@@ -38,8 +38,8 @@
                                     </li>
                              
                                 <li class="mb-3">
-                                    <span class="fw-medium me-2">Role:</span>
-                                    @if($user->user_role == 1)
+                                    <span class="fw-medium me-2">Type:</span>
+                                    @if($user->user_type == 1)
                                         <span class="badge bg-label-success">{{ 'Admin' }}</span>
                                     @else
                                         <span class="badge bg-label-danger">{{ 'User' }}</span>

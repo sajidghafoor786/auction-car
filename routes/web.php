@@ -50,9 +50,10 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     // Define admin routes 
     Route::get('/dashboard', 'Admin\AdminController@Dashboard')->name('dashboard');
+    // user & admin list route 
     Route::get('/admin-list', 'Admin\AdminController@index')->name('listUsers');
     Route::get('/create', 'Admin\AdminController@create')->name('createUser');
-    Route::post('/create', 'Admin\AdminController@save')->name('saveUser');
+    Route::post('/save', 'Admin\AdminController@save')->name('saveUser');
     Route::get('/edit/{id}', 'Admin\AdminController@edit')->name('editUser');
     Route::post('/update', 'Admin\AdminController@update')->name('updateUser');
     Route::get('/view/{id}', 'Admin\AdminController@show')->name('viewUser');

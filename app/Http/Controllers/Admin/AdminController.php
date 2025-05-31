@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use app\Models\User;
+use Validator;
+use Illuminate\Support\Facades\Hash;
+use Redirect;
 
 class AdminController extends Controller
 {
@@ -14,34 +17,31 @@ class AdminController extends Controller
      */
     public function Dashboard()
     {
-       return view("admin.dashboard");
+        return view("admin.dashboard");
     }
-
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-         $user = Auth::user();
-        $users = User::orderBy('id', 'DESC')
+        $users = User::query()
+            ->orderBy('id', 'DESC')       // Within each group, latest first
             ->get();
-
-        return view('admin.admin-user.index', ['users' => $users, 'title' => 'Users']);
+        return view('admin.admin-user.index', ['users' => $users]);
     }
-      public function create() {
+    public function create()
+    {
         return view('admin.admin-user.create');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $user = User::find($id);
-        if($user == null)
-        {
+        if ($user == null) {
             return redirect()->route('admin.listUsers')->with('error', 'No user found.');
         }
-        return view('admin.admin-user.edit',['user' => $user]);
+        return view('admin.admin-user.edit', ['user' => $user]);
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $user = User::find($id);
 
         if ($user == null) {
@@ -51,7 +51,8 @@ class AdminController extends Controller
         return view('admin.admin-user.view', ['user' => $user]);
     }
 
-    public function save(request $request) {
+    public function save(request $request)
+    {
         $validator = Validator::validate($request->all(), [
             'name' => 'required|string|max:191',
             'email' => 'required|email|unique:users',
@@ -64,8 +65,7 @@ class AdminController extends Controller
             'phone.unique' => 'The phone has already been taken.',
             'phone.digits_between' => 'The phone number must be between 11 and 15 digits.',
         ]);
-
-
+        // dd($request->all());
         $user = User::Create([
             'name'      => $request->input('name'),
             'email'     => $request->input('email'),
@@ -75,37 +75,26 @@ class AdminController extends Controller
             'status'    => $request->input('is_active')
         ]);
 
-        return response()->json([
-            'status' => 1,
+        return redirect()->route('admin.listUsers')->with([
             'message' => 'User created successfully',
-            'redirect_url' => route('admin.listUsers'),
+            'status' => 'success'
         ]);
-
     }
 
-    public function destroy(Request $request) {
-        $user = User::find($request->user_id);
-        if ($user == null) {
-            return response()->json(['status' => 0, 'message' => 'User not found.']);
-        }
-        User::where('id',$request->user_id)->delete();
-
-        return response()->json(['status' => 1, 'message' => 'Record deleted successfully.']);
-    }
-
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $user = User::find($request->id);
         if ($user == null) {
-            return redirect()->back()->with('error', 'No Record Found.');
+            return redirect()->back()->with(['status' => 'error', 'message' => 'User not found.']);
         }
 
         $rules = [
             'name' => 'required|string|max:150',
             'phone'     => 'required|numeric',
             'user_type'     => 'required|numeric',
-        
+
         ];
-        if($user->phone != $request->phone){
+        if ($user->phone != $request->phone) {
             $rules['phone'] = 'required|numeric|unique:users';
         }
 
@@ -127,32 +116,32 @@ class AdminController extends Controller
         }
 
         $user->update($userData);
-        return response()->json([
-            'status' => 1,
+        return redirect()->route('admin.listUsers')->with([
+            'status' => 'success',
             'message' => 'User updated successfully',
-            'redirect_url' => route('admin.listUsers'),
         ]);
     }
-
-    public function status(Request $request) {
+    public function destroy(Request $request)
+    {
         $user = User::find($request->user_id);
         if ($user == null) {
-            return response()->json(['status' => 0, 'message' => 'User not found.']);
+            return response()->json(['status' => 'error', 'message' => 'User not found.']);
         }
+        User::where('id', $request->user_id)->delete();
 
-        // if($request->status == 0){
-        //     $fromStatus = 'Active';
-        // }else{
-        //     $fromStatus = 'Inactive';
-        // }
-        // if($request->status == 1){
-        //     $toStatus = 'Active';
-        // }else{
-        //     $toStatus = 'Inactive';
-        // }
+        return response()->json(['status' => 'success', 'message' => 'Record deleted successfully.']);
+    }
+    public function status(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user == null) {
+            return response()->json(['status' => 'error', 'message' => 'User not found.']);
+        }
+        User::where('id', $request->user_id)->update(['status' => $request->status]);
 
-        User::where('id',$request->user_id)->update(['status' => $request->status]);
-
-        return response()->json(['status' => 1, 'message' => 'Status changed successfully.']);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Status changed successfully.'
+        ]);
     }
 }

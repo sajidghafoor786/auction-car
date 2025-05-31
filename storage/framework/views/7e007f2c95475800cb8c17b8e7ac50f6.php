@@ -38,8 +38,8 @@
                                     </li>
                              
                                 <li class="mb-3">
-                                    <span class="fw-medium me-2">Role:</span>
-                                    <?php if($user->user_role == 1): ?>
+                                    <span class="fw-medium me-2">Type:</span>
+                                    <?php if($user->user_type == 1): ?>
                                         <span class="badge bg-label-success"><?php echo e('Admin'); ?></span>
                                     <?php else: ?>
                                         <span class="badge bg-label-danger"><?php echo e('User'); ?></span>

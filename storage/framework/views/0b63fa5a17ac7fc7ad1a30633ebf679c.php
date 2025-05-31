@@ -53,7 +53,12 @@
                             <td><?php echo e($user->email); ?></td>
                             <td><?php echo e($user->phone ?? 'N/A'); ?> </td>
                             <td>
-                             <span class="badge bg-info me-1">Admin </span>
+                               <?php if($user->user_type == 1): ?>
+                               <span class="badge bg-success me-1">Admin </span>
+                               
+                               <?php else: ?>
+                               <span class="badge bg-info me-1">User </span>
+                                <?php endif; ?>
                             </td>
                             <td class="text-center">
                                 <?php if($user->status == 1): ?>
@@ -87,7 +92,7 @@
         $(document).ready(function() {
             $('#users_table').DataTable({
                 responsive: true,
-                "order": [],
+                 "order": [[4, 'asc']],
                 "aoColumnDefs": [{
                     'bSortable': false,
                     'aTargets': [5]
@@ -122,8 +127,8 @@
                             'user_id': userId
                         },
                         success: function (response) {
-                            notifyBlackToast(response.message)
-                            location.reload();
+                               toastr.success(response.message, response.status);
+                          setTimeout(() => location.reload(), 3000);
                         }
                     });
 
@@ -153,8 +158,8 @@
                             'user_id': userId
                         },
                         success: function (response) {
-                            notifyBlackToast(response.message)
-                            location.reload();
+                             toastr.success(response.message, response.status);
+                          setTimeout(() => location.reload(), 3000);
 
                         }
                     });
