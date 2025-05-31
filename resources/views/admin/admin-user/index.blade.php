@@ -6,20 +6,6 @@
 @section('content')
 <div class="container-xxl flex-grow-1 container-p-y">
 
-    @if(session('success'))
-    <div id="success" class="alert alert-primary alert-dismissible" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
-    @if(session('error'))
-    <div id="error" class="alert alert-danger alert-dismissible" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    @endif
-
     <h4 class="py-3 mb-2">
         <span class="text-muted fw-light">Users /</span> List
     </h4>

@@ -57,44 +57,24 @@
             </ul>
         </li>
 
-        <li class="menu-item {{ set_active(['admin.users.create', 'admin.users.index']) }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bxs-user-badge"></i>
-                <div data-i18n="Manage Users" data-label="Manage Users">Manage Users</div>
-            </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item {{ set_active(['admin.users.create']) }}">
-                    <a href="" class="menu-link">
-                        <div data-i18n="Add User">Add User</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ set_active(['admin.users.index']) }}">
-                    <a href="" class="menu-link">
-                        <div data-i18n="List Users">List Users</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-
         <li class="menu-header small text-uppercase" id="hide2">
             <span class="menu-header-text">Misc</span>
         </li>
 
-        <li class="menu-item {{ set_active(['admin.countries.index', 'admin.countries.create']) }}">
+        <li class="menu-item {{ set_active(['admin.cars.index', 'admin.cars.create']) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Countries</div>
+                <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Cars</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.countries.create']) }}">
-                    <a href="" class="menu-link">
-                        <div data-i18n="Add Country">Add Country</div>
+                    <a href="{{route('admin.cars.create') }}" class="menu-link">
+                        <div data-i18n="Add Country">Add Car</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.countries.index']) }}">
-                    <a href="{{ url('category') }}" class="menu-link">
-                        <div data-i18n="List Country">List Country</div>
+                    <a href="{{route('admin.cars.index' )}}" class="menu-link">
+                        <div data-i18n="List Country">List Car</div>
                     </a>
                 </li>
             </ul>

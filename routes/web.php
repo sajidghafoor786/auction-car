@@ -66,7 +66,9 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/category/update', [CategoryController::class, 'update'])->name('category.update');
     Route::DELETE('/category/deleteimage/{id}', [CategoryController::class, 'deleteimage'])->name('category.deleteimage');
-    //  Sub_category Route 
+    //  car route Route 
+    Route::resource('cars', 'Admin\CarController');
+    Route::post('/status', 'Admin\CarController@status')->name('cars.changeStatus');
     Route::get('/sub_category', [Sub_categoryController::class, 'index'])->name('sub_category');
     Route::POST('/sub_category/create', [Sub_CategoryController::class, 'create'])->name('sub_category.create');
     Route::get('/sub_category/delete/{id}', [Sub_categoryController::class, 'destroy'])->name('sub_category.delete');
