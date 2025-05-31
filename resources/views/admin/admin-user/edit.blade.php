@@ -46,7 +46,7 @@
                             </div>
 
                             <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <label class="form-label">Phone No. <span class="steric">*</span></label>
+                                <label class="form-label">Phone No. <span class="steric"></span></label>
                                 <input type="text" name="phone" id="phone"
                                        class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}"
                                        placeholder="Enter Phone Number" value="{{ $user->phone ?? old('phone') }}">
@@ -55,6 +55,14 @@
                                         <strong>{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
+                                <label class="form-label">User Role <span class="steric">*</span></label>
+                                 <select name="user_role" id="user_role" class="form-control select">
+                                    <option value="">Select Role</option>
+                                    <option value="1" {{ $user->user_role == 1 ? 'selected' : '' }}> Admin</option>
+                                    <option value="0" {{ $user->user_role == 0 ? 'selected' : '' }}>User</option>
+                                </select>
                             </div>
                             <div class="mb-3 col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
                                 <label class="form-label">Password</label>

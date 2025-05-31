@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('admin.layout.app')
 
 @section('styles')
 
@@ -10,7 +10,7 @@
         </h4>
         <div class="row mb-2">
             <div class="col-lg-12">
-                <a href="{{ route('listUsers') }}" class="btn btn-primary float-end">Back</a>
+                <a href="{{ route('admin.listUsers') }}" class="btn btn-primary float-end">Back</a>
             </div>
         </div>
         <div class="row">
@@ -18,7 +18,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form role="form" action="{{ route('saveUser') }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="post" enctype="multipart/form-data">
+                        <form role="form" action="{{ route('admin.saveUser') }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
 
                             <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
@@ -57,22 +57,14 @@
                                 @endif
                             </div>
 
-                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
-                                <input type="hidden" name="permissions" value="[]"> <!-- Default empty value -->
-                               <label class="form-label">Permissions <span class="steric">*</span></label>
-                               <select id="permissions" class="form-control select2 form-select select2-hidden-accessible" name="permissions[]" multiple="" data-select2-id="permissions" tabindex="-1" aria-hidden="true" data-placeholder="Select Permission" >
-                                   @foreach ($permissions as $permission)
-                                       <option value="{{$permission->id}}" {{ in_array($permission->id, old('permissions', [])) ? 'selected' : '' }}>{{$permission->title}}</option>
-                                   @endforeach
-                               </select>
-                              @if ($errors->has('permissions'))
-                                   @foreach ($errors->get('permissions') as $error)
-                                       <span class="invalid-feedback" role="alert">
-                                           <strong>{{ $error }}</strong>
-                                       </span>
-                                   @endforeach
-                              @endif
-                           </div>
+                               <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
+                                <label class="form-label">User Role <span class="steric">*</span></label>
+                                 <select name="user_role" id="user_role" class="form-control select">
+                                    <option value="">Select Role</option>
+                                    <option value="1" {{ $user->user_role == 1 ? 'selected' : '' }}> Admin</option>
+                                    <option value="0" {{ $user->user_role == 0 ? 'selected' : '' }}>User</option>
+                                </select>
+                            </div>
 
                             <div class="mb-3 col-sm-6 col-md-6 col-lg-6 form-password-toggle fv-plugins-icon-container">
                                 <label class="form-label">Password <span class="steric">*</span></label>

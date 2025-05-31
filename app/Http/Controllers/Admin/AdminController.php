@@ -29,15 +29,14 @@ class AdminController extends Controller
         return view('admin.admin-user.index', ['users' => $users, 'title' => 'Users']);
     }
       public function create() {
-        $permissions = Permission::get();
-        return view('admin.users.create', ['permissions' => $permissions]);
+        return view('admin.admin-user.create');
     }
 
     public function edit($id) {
         $user = User::find($id);
         if($user == null)
         {
-            return redirect()->route('listUsers')->with('error', 'No user found.');
+            return redirect()->route('admin.listUsers')->with('error', 'No user found.');
         }
         return view('admin.admin-user.edit',['user' => $user]);
     }
@@ -49,22 +48,21 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'No Record Found');
         }
 
-        return view('admin.users.view', ['user' => $user]);
+        return view('admin.admin-user.view', ['user' => $user]);
     }
 
     public function save(request $request) {
         $validator = Validator::validate($request->all(), [
             'name' => 'required|string|max:191',
             'email' => 'required|email|unique:users',
+            'user_type' => 'required',
             'phone' => 'required|numeric|digits_between:11,15|unique:users',
-            'permissions' => 'required|array',
             'password' => 'required_with:confirm_password|same:confirm_password|min:6'
         ], [
             'email.email' => 'The email is invalid.',
             'email.unique' => 'The email has already been taken.',
             'phone.unique' => 'The phone has already been taken.',
             'phone.digits_between' => 'The phone number must be between 11 and 15 digits.',
-            'permissions.array' => 'The permissions field is required.',
         ]);
 
 
@@ -72,24 +70,15 @@ class AdminController extends Controller
             'name'      => $request->input('name'),
             'email'     => $request->input('email'),
             'phone'     => $request->input('phone'),
-            'user_type' => 'administrator',
+            'user_type' => $request->input('user_type'),
             'password'  => Hash::make($request->input('password')),
             'status'    => $request->input('is_active')
         ]);
 
-        if ($request->has('permissions')) {
-
-            $user->permissions()->sync($request->permissions);
-        }
-
-        $adminUser =  Auth::guard()->user();
-        $permissionsArray = Permission::select('title')->whereIn('id', $request->permissions)->pluck('title')->toArray();
-        $permission = implode(', ', $permissionsArray);
-
         return response()->json([
             'status' => 1,
             'message' => 'User created successfully',
-            'redirect_url' => route('listUsers'),
+            'redirect_url' => route('admin.listUsers'),
         ]);
 
     }
@@ -107,13 +96,14 @@ class AdminController extends Controller
     public function update(Request $request) {
         $user = User::find($request->id);
         if ($user == null) {
-            return redirect()->action('UserController@index')->with('error', 'No Record Found.');
+            return redirect()->back()->with('error', 'No Record Found.');
         }
 
         $rules = [
             'name' => 'required|string|max:150',
             'phone'     => 'required|numeric',
-            'permissions' => 'required|array',
+            'user_type'     => 'required|numeric',
+        
         ];
         if($user->phone != $request->phone){
             $rules['phone'] = 'required|numeric|unique:users';
@@ -125,14 +115,11 @@ class AdminController extends Controller
 
         $validator = Validator::validate($request->all(), $rules);
 
-        $adminUser =  Auth::guard()->user();
-        $permissionsArray = Permission::select('title')->whereIn('id', $request->permissions)->pluck('title')->toArray();
-        $permission = implode(', ', $permissionsArray);
-
         $userData = [
             'name' => $request->input('name'),
             'phone' => $request->input('phone'),
             'status' => $request->input('is_active'),
+            'user_type' => $request->input('user_type'),
         ];
 
         if (!empty($request->password)) {
@@ -140,12 +127,10 @@ class AdminController extends Controller
         }
 
         $user->update($userData);
-        $user->permissions()->sync($request->permissions);
-
         return response()->json([
             'status' => 1,
             'message' => 'User updated successfully',
-            'redirect_url' => route('listUsers'),
+            'redirect_url' => route('admin.listUsers'),
         ]);
     }
 
@@ -155,16 +140,16 @@ class AdminController extends Controller
             return response()->json(['status' => 0, 'message' => 'User not found.']);
         }
 
-        if($request->status == 0){
-            $fromStatus = 'Active';
-        }else{
-            $fromStatus = 'Inactive';
-        }
-        if($request->status == 1){
-            $toStatus = 'Active';
-        }else{
-            $toStatus = 'Inactive';
-        }
+        // if($request->status == 0){
+        //     $fromStatus = 'Active';
+        // }else{
+        //     $fromStatus = 'Inactive';
+        // }
+        // if($request->status == 1){
+        //     $toStatus = 'Active';
+        // }else{
+        //     $toStatus = 'Inactive';
+        // }
 
         User::where('id',$request->user_id)->update(['status' => $request->status]);
 
