@@ -31,7 +31,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
 
+      <!-- Icons. Uncomment required icon fonts -->
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/boxicons.css') }}" />
+
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/fontawesome.css') }}" />
+
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/fonts/flag-icons.css') }}" />
+
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
@@ -88,6 +94,7 @@
     <script src="{{ asset('admin/assets/vendor/js/helpers.js') }}"></script>
 
     <script src="{{ asset('admin/assets/vendor/js/template-customizer.js') }}"></script>
+    
 
     <style>
    

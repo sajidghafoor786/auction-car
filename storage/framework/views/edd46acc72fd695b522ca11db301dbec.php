@@ -45,12 +45,12 @@
 
             <ul class="menu-sub">
                 <li class="menu-item <?php echo e(set_active(['createUser'])); ?>">
-                    <a href="<?php echo e(route('admin.user')); ?>" class="menu-link">
+                    <a href="<?php echo e(route('admin.createUser')); ?>" class="menu-link">
                         <div data-i18n="Add User">Add User</div>
                     </a>
                 </li>
                 <li class="menu-item <?php echo e(set_active(['listUsers'])); ?>">
-                    <a href="" class="menu-link">
+                    <a href="<?php echo e(route('admin.listUsers')); ?>" class="menu-link">
                         <div data-i18n="List Users">List Users</div>
                     </a>
                 </li>

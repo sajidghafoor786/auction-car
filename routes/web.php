@@ -9,7 +9,7 @@ use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\ShopController;
 // use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\admin\ShippingCharge;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\BrandsController;
 use App\Http\Controllers\user\CheckOutController;
 // use App\Http\Controllers\Auth\RegisterController;
@@ -49,7 +49,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // admin deshboard route in whitch  isAdmin middleware 
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     // Define admin routes 
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', 'Admin\AdminController@Dashboard')->name('dashboard');
+    Route::get('/admin-list', 'Admin\AdminController@index')->name('listUsers');
+    Route::get('/create', 'Admin\AdminController@create')->name('createUser');
+    Route::post('/create', 'Admin\AdminController@save')->name('saveUser');
+    Route::get('/edit/{id}', 'Admin\AdminController@edit')->name('editUser');
+    Route::post('/update', 'Admin\AdminController@update')->name('updateUser');
+    Route::get('/view/{id}', 'Admin\AdminController@show')->name('viewUser');
+    Route::post('/delete', 'Admin\AdminController@destroy')->name('deleteUser');
+    Route::post('/status', 'Admin\AdminController@status')->name('changeStatus');
     //  category Route 
     Route::get('/category', [CategoryController::class, 'index'])->name('category');
     Route::POST('/category/create', [CategoryController::class, 'create'])->name('category.create');

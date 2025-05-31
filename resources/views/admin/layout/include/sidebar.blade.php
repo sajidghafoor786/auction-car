@@ -45,12 +45,12 @@
 
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['createUser']) }}">
-                    <a href="{{ route('admin.user.add') }}" class="menu-link">
+                    <a href="{{ route('admin.createUser') }}" class="menu-link">
                         <div data-i18n="Add User">Add User</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['listUsers']) }}">
-                    <a href="{{ route('admin.user.list') }}" class="menu-link">
+                    <a href="{{ route('admin.listUsers') }}" class="menu-link">
                         <div data-i18n="List Users">List Users</div>
                     </a>
                 </li>
