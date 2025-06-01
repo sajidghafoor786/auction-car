@@ -24,7 +24,12 @@ class FrontController extends Controller
     {
         $auction->load('car');
         // dd($auction);
-        return view('frontend.auction-detail', compact('auction'));
+          $bids = Bid::where('auction_id', $auction->id)
+        ->with('user')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+        return view('frontend.auction-detail', compact('auction','bids'));
     }
 
 

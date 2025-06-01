@@ -30,6 +30,11 @@ E-SHOP
     .price {
         font-family: monospace;
     }
+
+    table th,
+    table td {
+        vertical-align: middle;
+    }
 </style>
 <section class="section-7 pt-3 mb-3">
     <div class="container">
@@ -78,35 +83,60 @@ E-SHOP
                     <p>{{ $auction->car->description }}</p>
 
 
-                   <form id="bidForm">
-    @csrf
-    <input type="hidden" name="auction_id" value="{{ $auction->id }}">
-    <div class="row align-item-center">
-        <div class="col-md-4">
-            <label class="form-label">Current Maximum Bid</label>
-            <input type="text" class="form-control" disabled value="{{ $auction->current_bid }}">
-        </div>
-        <div class="col-md-4">
-            <label class="form-label">Your Bid</label>
-            <input type="number" name="bid_amount" class="form-control" placeholder="Enter your bid amount">
-        </div>
-        <div class="col-md-4 mt-4">
-            <button type="submit" class="btn btn-primary w-100">
-                <i class="fas fa-gavel me-1"></i> Bid Now
-            </button>
-        </div>
-    </div>
-</form>
-<div id="bidMessage" class="mt-3"></div>
+                    <form id="bidForm">
+                        @csrf
+                        <input type="hidden" name="auction_id" value="{{ $auction->id }}">
+                        <div class="row align-item-center">
+                            <div class="col-md-4">
+                                <label class="form-label">Current Maximum Bid</label>
+                                <input type="text" class="form-control" disabled value="{{ $auction->current_bid }}">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Your Bid</label>
+                                <input type="number" name="bid_amount" class="form-control" placeholder="Enter your bid amount">
+                            </div>
+                            <div class="col-md-4 ">
+                                <button type="submit" class="btn btn-primary w-100" style="margin-top: 32px;">
+                                    <i class="fas fa-gavel me-1"></i> Bid Now
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="bidMessage" class="mt-3"></div>
 
                 </div>
             </div>
             <div class="col-md-12 mt-5">
                 <div class="bg-white p-3">
                     <h2>Bid History</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae, doloremque!</p>
+
+                    @if($bids->isEmpty())
+                    <p class="text-muted">No bids yet. Be the first to bid!</p>
+                    @else
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Bidder</th>
+                                <th>Bid Amount (PKR)</th>
+                                <th>Bid Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($bids as $index => $bid)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $bid->user->name ?? 'Unknown User' }}</td>
+                                <td>{{ number_format($bid->bid_amount) }}</td>
+                                <td>{{ $bid->created_at->format('d M Y, h:i A') }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @endif
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -149,20 +179,20 @@ E-SHOP
 </section>
 @endsection
 @section('custemjs')
-    <script>
-    $('#bidForm').on('submit', function (e) {
+<script>
+    $('#bidForm').on('submit', function(e) {
         e.preventDefault();
 
         $.ajax({
             url: "{{ route('add-bid') }}",
             method: 'POST',
             data: $(this).serialize(),
-            success: function (response) {
+            success: function(response) {
                 $('#bidMessage').html(`<div class="alert alert-success">${response.message}</div>`);
                 // Optional: reload or update current bid dynamically
                 setTimeout(() => window.location.reload(), 1500);
             },
-            error: function (xhr) {
+            error: function(xhr) {
                 const res = xhr.responseJSON;
                 if (res && res.message) {
                     $('#bidMessage').html(`<div class="alert alert-danger">${res.message}</div>`);

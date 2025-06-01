@@ -49,7 +49,7 @@
 padding: 0px ;
 
 }
-.auction span {
+.auction span , .auction p  {
     font-size: 11px;
     font-family: monospace;
 }
@@ -91,18 +91,22 @@ a:hover{
 
                                 </div> -->
                                 <a href="link h6 text-dark"><?php echo e($auction->car->name); ?></a>
-                                <div class="d-flex auction">
+                                <div class="d-flex auction justify-content-between">
                                     <div class="mb-2">
                                         <i class="fas fa-gavel me-1 text-success"></i>
                                         <span class="text-dark">Min Bid</span>
-                                        <span class="text-success"><?php echo e(number_format($auction->minimum_bid)); ?> /PKR</span>
+                                        <p class="text-dark"><?php echo e(number_format($auction->minimum_bid)); ?> /PKR</p>
                                     </div>
-                                    <div class="mb-2 justify-content-start">
+                                    <div class="mb-2 justify-content-start ms-2">
                                         <i class="fas fa-hand-holding-usd me-1 text-danger"></i>
                                         <span class="text-dark">Current</span>
-                                        <span class="text-danger"><?php echo e(number_format($auction->current_bid)); ?>  /PKR</span>
+                                        <p class="text-dark"><?php echo e(number_format($auction->current_bid)); ?>  /PKR</p>
                                     </div>
-
+                                    <div class="mb-2 justify-content-start ms-2">
+                                        <i class="fas fa-calendar-alt me-1 "></i>
+                                        <span class="text-dark">Date</span>
+                                        <p class="text-dark"><?php echo e(\Carbon\Carbon::parse($auction->start_date)->format('d M Y')); ?> </p>
+                                    </div>
                                 </div>
                                 <a href="<?php echo e(route('auctionDetail', $auction->id)); ?>" class="btn btn-primary btn mt-2" >
                                     <i class="fas fa-eye me-1"></i> View Details
