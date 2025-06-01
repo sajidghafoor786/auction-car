@@ -188,13 +188,14 @@ E-SHOP
             method: 'POST',
             data: $(this).serialize(),
             success: function(response) {
-                $('#bidMessage').html(`<div class="alert alert-success">${response.message}</div>`);
-                // Optional: reload or update current bid dynamically
-                setTimeout(() => window.location.reload(), 1500);
+                toastr.success(response.message);
+                $('#bidMessage').addClass('d-none');
+
             },
             error: function(xhr) {
                 const res = xhr.responseJSON;
                 if (res && res.message) {
+                   $('#bidMessage').removeClass('d-none');
                     $('#bidMessage').html(`<div class="alert alert-danger">${res.message}</div>`);
                 }
             }

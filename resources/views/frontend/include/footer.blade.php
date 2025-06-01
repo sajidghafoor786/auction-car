@@ -68,7 +68,7 @@
           preloader.style.display = 'none';
         }, 100);
       }
-    }, 1000); // 1 seconds
+    }, 1000); 
   });
 </script>
 

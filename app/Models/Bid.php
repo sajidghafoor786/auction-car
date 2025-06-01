@@ -19,5 +19,10 @@ class Bid extends Model
 {
     return $this->belongsTo(User::class);
 }
+public function auction()
+{
+    return $this->belongsTo(Auction::class);
+}
+
 
 }

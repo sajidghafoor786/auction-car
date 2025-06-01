@@ -86,6 +86,7 @@ Route::group(['prefix' => 'account'], function () {
         // this route after authenticated accessable
         Route::get('/logout', [LoginController::class, 'LogOut'])->name('user.logout');
         Route::get('/profile', [LoginController::class, 'profile'])->name('user.profile');
+        Route::post('/profile', [LoginController::class, 'profileUpdate'])->name('user.profileUpdate');
         Route::get('/order', [MyOrderController::class, 'MyOrder'])->name('user.MyOrder');
         Route::get('/order-details/{id}', [MyOrderController::class, 'MyOrderDetails'])->name('user.MyOrderDetails');
         // wishlist route 
@@ -99,5 +100,6 @@ Route::get('/details', function () {
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
 Route::get('/auction-detail/{auction}', 'FrontController@auctionDetail')->name('auctionDetail');
 Route::post('/auction-bid', 'FrontController@auctionAddBid')->name('add-bid');
+Route::get('/auction-biding-history', 'FrontController@myBidHistory')->name('bidding.history');
 
 Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');

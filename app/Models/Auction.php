@@ -8,18 +8,23 @@ use App\Models\Car;
 
 class Auction extends Model
 {
-    use HasFactory;
-      protected $fillable = [
-        'car_id',
-        'user_id',
-        'minimum_bid',
-        'current_bid',
-        'start_date',
-        'end_date',
-        'status',
-    ];
+  use HasFactory;
+  protected $fillable = [
+    'car_id',
+    'user_id',
+    'minimum_bid',
+    'current_bid',
+    'start_date',
+    'end_date',
+    'status',
+  ];
   public function car()
-    {
-        return $this->belongsTo(Car::class);
-    }
+  {
+    return $this->belongsTo(Car::class);
+  }
+
+  public function winningBid()
+  {
+    return $this->hasOne(Bid::class)->orderBy('bid_amount', 'desc');
+  }
 }

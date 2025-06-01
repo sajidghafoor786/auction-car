@@ -7,6 +7,9 @@ use App\Models\Auction;
 use App\Models\Bid;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 
 class FrontController extends Controller
 {
@@ -24,12 +27,12 @@ class FrontController extends Controller
     {
         $auction->load('car');
         // dd($auction);
-          $bids = Bid::where('auction_id', $auction->id)
-        ->with('user')
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $bids = Bid::where('auction_id', $auction->id)
+            ->with('user')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('frontend.auction-detail', compact('auction','bids'));
+        return view('frontend.auction-detail', compact('auction', 'bids'));
     }
 
 
@@ -79,5 +82,26 @@ class FrontController extends Controller
         $auction->update();
 
         return Response::json(['status' => 'success', 'message' => 'Your bid has been placed successfully.']);
+    }
+    public function myBidHistory(Request $request)
+    {
+        $user = auth()->user();
+
+        // Get user's bids with related auction and car
+        $bids = Bid::with(['auction.car'])
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        // Get all ended auctions and their highest bids
+        $endedAuctions = Bid::select('auction_id', DB::raw('MAX(bid_amount) as max_bid'))
+            ->whereHas('auction', function ($query) {
+                $query->where('end_date', '<', Carbon::now());
+            })
+            ->groupBy('auction_id')
+            ->get()
+            ->pluck('max_bid', 'auction_id');
+
+        return view('frontend.auction-history', compact('bids', 'endedAuctions'));
     }
 }

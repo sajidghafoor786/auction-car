@@ -28,20 +28,20 @@
                         <a class="nav-link active" aria-current="page" href="index.php" title="Products">Help</a>
                     </li>
                 </ul>
-                <div class="col-lg-6 col-6 text-left d-flex justify-content-end align-items-center">
+                <div class="col-lg-6 col-6  d-flex justify-content-end align-items-center">
                     <?php if(Auth::check()): ?>
-                        <a href="<?php echo e(route('user.profile')); ?>" class="nav-link text-white me-3">My Account</a>
+                        <a href="<?php echo e(route('user.profile')); ?>" class="nav-link text-white "><b><?php echo e(auth()->user()->name); ?> </b></a>
                     <?php else: ?>
-                        <a href="<?php echo e(route('user.login')); ?>" class="nav-link text-white me-2"><i class="far fa-user me-1"></i> Login</a>
+                        <a href="<?php echo e(route('user.login')); ?>" class="nav-link text-white me-2 justify-content-start"><i class="far fa-user me-1"></i> Login</a>
                     <?php endif; ?>
 
-                    <form action="<?php echo e(url('/')); ?>" method="GET" class="d-flex">
+                    <!-- <form action="<?php echo e(url('/')); ?>" method="GET" class="d-flex">
                         <input type="text" placeholder="Search For Products" value="<?php echo e(Request::get('Search')); ?>"
                             class="form-control form-control-sm me-1" name="Search">
                         <button type="submit" class="btn btn-sm btn-dark">
                             <i class="fa fa-search"></i>
                         </button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
 

@@ -44,6 +44,24 @@ class LoginController extends Controller
         return redirect()->route('user.home')->with('message', 'you are successful logout!');
     }
     public function profile(){
-        return view('user.account.profile');
+        $user = Auth::user();
+        return view('frontend.account.profile' ,compact('user'));
+    }
+    public function profileUpdate( Request $request){
+       $user = User::find($request->id);
+         $validator = Validator::validate($request->all(), [
+            'name' => 'required',
+            'phone' => 'required|numeric|digits_between:11,15|unique:users',
+         ]);
+        // dd($request->all());
+        $data = [
+            'name'      => $request->input('name'),
+            'phone'     => $request->input('phone'),
+        ];
+         $user->update($data);
+        return redirect()->back()->with([
+            'message' => 'User updated successfully',
+            'status' => 'success'
+        ]);
     }
 }
