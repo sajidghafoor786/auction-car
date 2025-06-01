@@ -71,7 +71,7 @@ class FrontController extends Controller
 
         // Update auction current bid
         $auction->current_bid = $request->bid_amount;
-        $auction->save();
+        $auction->update();
 
         return Response::json(['status' => 'success', 'message' => 'Your bid has been placed successfully.']);
     }

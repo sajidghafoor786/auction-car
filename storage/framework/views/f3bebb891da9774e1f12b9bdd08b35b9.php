@@ -53,6 +53,7 @@ padding: 0px ;
     font-size: 11px;
     font-family: monospace;
 }
+
 .auction i {
     font-size: 11px;
 }
