@@ -87,6 +87,9 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('/logout', [LoginController::class, 'LogOut'])->name('user.logout');
         Route::get('/profile', [LoginController::class, 'profile'])->name('user.profile');
         Route::post('/profile', [LoginController::class, 'profileUpdate'])->name('user.profileUpdate');
+       
+        Route::get('/reset-password', [LoginController::class, 'resetFormShow'])->name('user.resetFormShow');
+       Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('user.reset-password');
         Route::get('/order', [MyOrderController::class, 'MyOrder'])->name('user.MyOrder');
         Route::get('/order-details/{id}', [MyOrderController::class, 'MyOrderDetails'])->name('user.MyOrderDetails');
         // wishlist route 

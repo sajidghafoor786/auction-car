@@ -16,7 +16,7 @@ class LoginController extends Controller
 {
     public function login()
     {
-        return view('user.account.login');
+        return view('frontend.account.login');
     }
     public function AuthenticateProcess(Request $request)
     {
@@ -63,5 +63,29 @@ class LoginController extends Controller
             'message' => 'User updated successfully',
             'status' => 'success'
         ]);
+    }
+    public function resetFormShow(Request $request){
+        $user = Auth::user();
+        return view('frontend.account.reset-password',compact('user'));
+
+    }
+    public function resetPassword(Request $request){
+         $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+
+    $user = auth()->user();
+
+    // Check current password
+    if (!Hash::check($request->current_password, $user->password)) {
+        return back()->withErrors(['current_password' => 'Current password is incorrect']);
+    }
+
+    // Update password
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return back()->with(['message'=> 'Password updated successfully.' , 'status' => 'success']);
     }
 }

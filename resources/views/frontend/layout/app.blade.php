@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>@yield('title')</title>
     <meta name="description" content="" />
-    <meta name="viewport"content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="HandheldFriendly" content="True" />
     <meta name="pinterest" content="nopin" />
@@ -83,49 +83,89 @@
             background-color: #dc3545 !important;
             /* Red color for delete */
         }
-        .CartIcon{
+
+        .CartIcon {
             border-radius: 60% !important;
             /* padding: 7px !important; */
             font-size: 12px !important;
-        
+
         }
-        .wishIcon{
+
+        .wishIcon {
             margin-left: 50px !important;
         }
-      #preloader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-      }
 
-      .spinner {
-        width: 60px;
-        height: 60px;
-        border: 6px solidrgb(255, 217, 0); /* Yellow border */
-    border-top: 6px solid transparent;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
 
-      @keyframes spin {
-        0%   { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-   
+        .spinner-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* The rotating spinner ring */
+        .spinner {
+            position: absolute;
+            width: 80px;
+            /* bigger than text */
+            height: 80px;
+            border: 6px solid rgb(255, 217, 0);
+            /* yellow border */
+            border-top: 6px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            z-index: 1;
+        }
+
+        /* The icon + text */
+        .spinner-text {
+            position: relative;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
 
 <body data-instant-intensity="mousedown">
-<div id="preloader">
-    <div class="spinner"></div>
-  </div>
+    <div id="preloader">
+        <div class="spinner-wrapper">
+            <div class="spinner"></div>
+            <div >
+                <i class="fa fa-car me-auto" style="text-align: center; display: block;"></i>
+                <p >Auction</p>
+            </div>
+          
+            </a>
+        </div>
+    </div>
+
     @include('frontend.include.header')
     <main>
         @yield('content')

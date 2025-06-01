@@ -6,7 +6,7 @@
         <a href="<?php echo e(route('bidding.history')); ?>"  class="nav-link font-weight-bold" role="tab" aria-controls="tab-register" aria-expanded="false"><i class="fa icon fa-gavel "></i>My Biding</a>
     </li>
     <li class="nav-item">
-        <a href="change-password.php"  class="nav-link font-weight-bold" role="tab" aria-controls="tab-register" aria-expanded="false"><i class="fas fa-lock"></i> Change Password</a>
+        <a href="<?php echo e(route('user.resetFormShow')); ?>"  class="nav-link font-weight-bold" role="tab" aria-controls="tab-register" aria-expanded="false"><i class="fas fa-lock"></i> Change Password</a>
     </li>
     <li class="nav-item">
         <a href="<?php echo e(route('user.logout')); ?>" class="nav-link font-weight-bold" role="tab" aria-controls="tab-register" aria-expanded="false"><i class="fas fa-sign-out-alt"></i> Logout</a>

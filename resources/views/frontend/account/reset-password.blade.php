@@ -26,19 +26,46 @@ profile account
                         <h2 class="h5 mb-0 pt-2 pb-2">Reset Password</h2>
                     </div>
                     <div class="card-body p-4">
-                        <form action="{{ route('user.reset-password') }}" method="post">
+                        <form action="{{ route('user.reset-password') }}" method="POST">
                             @csrf
-                            <div class="row">
-                                <input type="hidden" value="{{ $user->id }}" name="id">
-                                <div class="mb-3">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" name="phone" value="{{ $user->phone }}" id="phone" placeholder="Enter Your Phone" class="form-control">
-                                </div>
-                                <div class="d-flex">
-                                    <button type="submit" class="btn btn-dark">Update</button>
-                                </div>
+                            <input type="hidden" value="{{ $user->id }}" name="id">
+
+                            <div class="mb-3">
+                                <label for="current_password">Current Password</label>
+                                <input type="password" name="current_password" id="current_password"
+                                    class="form-control @error('current_password') is-invalid @enderror"
+                                    required>
+                                @error('current_password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="new_password">New Password</label>
+                                <input type="password" name="new_password" id="new_password"
+                                    class="form-control @error('new_password') is-invalid @enderror"
+                                    required>
+                                @error('new_password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="new_password_confirmation">Confirm New Password</label>
+                                <input type="password" name="new_password_confirmation" id="new_password_confirmation"
+                                    class="form-control @error('new_password_confirmation') is-invalid @enderror"
+                                    required>
+                                @error('new_password_confirmation')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-dark">Update Password</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
