@@ -16,7 +16,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form role="form" action="<?php echo e(route('admin.cars.update', $car->id )); ?>" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="PATCH" enctype="multipart/form-data">
+                        <form role="form" action="<?php echo e(route('admin.cars.update', $car->id )); ?>" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="post" enctype="multipart/form-data">
                             <?php echo csrf_field(); ?>
 
                             <div class="col-sm-6">
@@ -92,7 +92,7 @@ unset($__errorArgs, $__bag); ?>
                                 <label class="form-label">Image</label>
                                 <input type="file" name="image" class="form-control">
                                 <?php if($car->image): ?>
-                                    <img src="<?php echo e(asset('uploads/cars/' . $car->image)); ?>" width="100" class="mt-2" />
+                                    <img src="<?php echo e(asset('storage/' . $car->image)); ?>" width="100" class="mt-2" />
                                 <?php endif; ?>
                             </div>
 

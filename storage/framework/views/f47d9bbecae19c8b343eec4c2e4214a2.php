@@ -87,7 +87,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     method: "POST",
-                    url: "<?php echo e(route('admin.cars.destroy', '')); ?>/" + carId,
+                   url: "<?php echo e(url('admin/cars')); ?>/" + carId,
                     data: {
                         _token: '<?php echo e(csrf_token()); ?>',
                         _method: 'DELETE'

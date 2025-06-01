@@ -67,8 +67,25 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::put('/category/update', [CategoryController::class, 'update'])->name('category.update');
     Route::DELETE('/category/deleteimage/{id}', [CategoryController::class, 'deleteimage'])->name('category.deleteimage');
     //  car route Route 
-    Route::resource('cars', 'Admin\CarController');
+    Route::get('cars', 'Admin\CarController@index')->name('cars.index');
+    Route::get('cars/create', 'Admin\CarController@create')->name('cars.create');
+    Route::post('cars', 'Admin\CarController@store')->name('cars.store');
+    Route::get('cars/{car}', 'Admin\CarController@show')->name('cars.show');
+    Route::get('cars/{car}/edit', 'Admin\CarController@edit')->name('cars.edit');
+    Route::post('cars/update', 'Admin\CarController@update')->name('cars.update');
+    Route::delete('cars/{car}', 'Admin\CarController@destroy')->name('cars.destroy');
     Route::post('/status', 'Admin\CarController@status')->name('cars.changeStatus');
+    // car auction route 
+    // Car Auction Routes (without using resource routes)
+Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
+Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
+Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
+Route::get('auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
+Route::post('car-auctions/update', 'Admin\AuctionController@update')->name('carAuction.update');
+Route::post('car-auctions/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
+Route::post('car-auctions/change-status', 'Admin\AuctionController@changeStatus')->name('carAuction.changeStatus');
+Route::get('car-auctions/{id}', 'Admin\AuctionController@show')->name('carAuction.show');
+
     Route::get('/sub_category', [Sub_categoryController::class, 'index'])->name('sub_category');
     Route::POST('/sub_category/create', [Sub_CategoryController::class, 'create'])->name('sub_category.create');
     Route::get('/sub_category/delete/{id}', [Sub_categoryController::class, 'destroy'])->name('sub_category.delete');
@@ -107,11 +124,11 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/order-details/{id}', [OrderController::class, 'OrderDetails'])->name('order-detail');
     Route::post('/order/update/{id}', [OrderController::class, 'OrderStatusUpdate'])->name('order.update');
     Route::post('/send_invoice/{id}', [OrderController::class, 'InvoiceEmail'])->name('sendInvoce_email');
-// All user  routre 
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
-Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+    // All user  routre 
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
 
     // ProductSubCategory Route here 
     Route::get('/product_sub_category', [ProductSubCategoryController::class, 'index'])->name('product_sub_category');
@@ -162,4 +179,3 @@ Route::post('/shipping-ordersummery', [CheckOutController::class, 'OrderSummeryS
 // onclick discount coupooen apply route 
 Route::get('/discount-coupen-apply', [CheckOutController::class, 'DiscountApply'])->name('user.DiscountApply');
 Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');
-

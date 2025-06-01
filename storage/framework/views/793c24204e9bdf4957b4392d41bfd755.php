@@ -57,7 +57,7 @@
                                 <?php if(!empty($car->image)): ?>
                                     <li class="mb-3">
                                         <span class="fw-medium me-2">Image:</span><br>
-                                        <img src="<?php echo e(asset('uploads/cars/' . $car->image)); ?>" alt="Car Image" style="max-width: 200px; height: auto;">
+                                        <img src="<?php echo e(asset('storage/' . $car->image)); ?>" alt="Car Image" style="max-width: 200px; height: auto;">
                                     </li>
                                 <?php endif; ?>
 

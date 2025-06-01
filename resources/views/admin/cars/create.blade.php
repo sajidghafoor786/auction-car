@@ -68,7 +68,7 @@
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-<div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
+                            <div class="col-sm-6 col-md-6 col-lg-6 fv-plugins-icon-container">
                             <label class="form-label">Status</label>
                             <div>
                                 <input name="is_active" checked type="checkbox"

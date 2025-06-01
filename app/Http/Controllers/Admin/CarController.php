@@ -10,7 +10,7 @@ class CarController extends Controller
 {
     public function index()
     {
-        $cars = Car::where('status' , 1)->get();
+        $cars = Car::get();
         return view('admin.cars.index', compact('cars'));
     }
 
@@ -22,7 +22,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:cars',
             'make' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'year' => 'required|integer',
@@ -37,12 +37,12 @@ class CarController extends Controller
             'make' => $request->make,
             'model' => $request->model,
             'year' => $request->year,
-            'status' => $request->status,
+            'status' => $request->is_active,
             'description' => $request->description,
             'image' => $imagePath,
         ]);
 
-        return redirect()->route('admin.cars.index')->with(['message', 'Car added successfully.' , 'status', 'success']);
+        return redirect()->route('admin.cars.index')->with(['message'=> 'Car added successfully.' , 'status'=> 'success']);
     }
 
     public function show(Car $car)
@@ -56,45 +56,61 @@ class CarController extends Controller
         return view('admin.cars.edit', compact('car'));
     }
 
-    public function update(Request $request, Car $car)
-    {
-        $request->validate([
-            'name' => 'required',
-            'make' => 'required|string|max:255',
-            'model' => 'required|string|max:255',
-            'year' => 'required|integer',
-            'description' => 'required|string',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-        ]);
+   public function update(Request $request)
+{
+    $car = Car::findOrFail($request->id);
+    $request->validate([
+        'name' => 'required|unique:cars,name,' . $car->id,
+        'make' => 'required|string|max:255',
+        'model' => 'required|string|max:255',
+        'year' => 'required|integer',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
 
-        if ($request->hasFile('image')) {
-            if ($car->image) {
-                Storage::disk('public')->delete($car->image);
-            }
-            $car->image = $request->file('image')->store('cars', 'public');
+    $data = [
+        'name' => $request->name,
+        'make' => $request->make,
+        'model' => $request->model,
+        'year' => $request->year,
+        'description' => $request->description,
+        'status' => $request->is_active ?? 0,
+    ];
+
+    if ($request->hasFile('image')) {
+        if ($car->image && Storage::disk('public')->exists($car->image)) {
+            Storage::disk('public')->delete($car->image);
         }
-
-        $car->update($request->only(['name','make', 'model', 'year', 'description', 'image' , 'status']));
-
-        return redirect()->route('admin.cars.index')->with(['message', 'Car updated successfully.' , 'status', 'success']);
+        $data['image'] = $request->file('image')->store('cars', 'public');
     }
+    $car->update($data);
+
+    return redirect()->route('admin.cars.index')->with([
+        'message' => 'Car updated successfully.',
+        'status' => 'success'
+    ]);
+}
+
 
     public function destroy(Car $car)
     {
+         if ($car == null) {
+            return response()->json(['status' => 'error', 'message' => 'data not found.']);
+        }
         if ($car->image) {
             Storage::disk('public')->delete($car->image);
         }
 
         $car->delete();
-        return redirect()->route('cars.index')->with('success', 'Car deleted successfully.');
+        return response()->json([ 'status'=> 'success' ,'message'=> 'Car deleted successfully']);
     }
      public function status(Request $request)
     {
-        $user = Car::find($request->user_id);
+        $user = Car::find($request->car_id);
         if ($user == null) {
             return response()->json(['status' => 'error', 'message' => 'data not found.']);
         }
-        Car::where('id', $request->id)->update(['status' => $request->status]);
+        Car::where('id', $request->car_id)->update(['status' => $request->status]);
 
         return response()->json([
             'status' => 'success',

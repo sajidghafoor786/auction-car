@@ -14,11 +14,12 @@ return new class extends Migration
        Schema::create('auctions', function (Blueprint $table) {
     $table->id();
     $table->foreignId('car_id');
-    $table->decimal('starting_bid', 10, 2);
-    $table->decimal('current_bid', 10, 2)->nullable();
-    $table->dateTime('end_time');
+    $table->foreignId('user_id')->nullable();
+    $table->double('minimum_bid');
+    $table->double('current_bid')->nullable();
+    $table->dateTime('start_date');
+    $table->dateTime('end_date');
     $table->enum('status', ['active', 'closed'])->default('active');
-    $table->foreignId('winner_id')->nullable();
     $table->timestamps();
 });
 

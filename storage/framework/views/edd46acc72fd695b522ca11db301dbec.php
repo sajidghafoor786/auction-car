@@ -67,14 +67,32 @@
                 <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Cars</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item <?php echo e(set_active(['admin.countries.create'])); ?>">
+                <li class="menu-item <?php echo e(set_active(['admin.cars.create'])); ?>">
                     <a href="<?php echo e(route('admin.cars.create')); ?>" class="menu-link">
                         <div data-i18n="Add Country">Add Car</div>
                     </a>
                 </li>
-                <li class="menu-item <?php echo e(set_active(['admin.countries.index'])); ?>">
+                <li class="menu-item <?php echo e(set_active(['admin.cars.index'])); ?>">
                     <a href="<?php echo e(route('admin.cars.index' )); ?>" class="menu-link">
                         <div data-i18n="List Country">List Car</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item <?php echo e(set_active(['admin.carAuction.index', 'admin.carAuction.create'])); ?>">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-world"></i>
+                <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Auction</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item <?php echo e(set_active(['admin.carAuction.create'])); ?>">
+                    <a href="<?php echo e(route('admin.carAuction.create')); ?>" class="menu-link">
+                        <div data-i18n="Add Country">Add Acution</div>
+                    </a>
+                </li>
+                <li class="menu-item <?php echo e(set_active(['admin.carAuction.index'])); ?>">
+                    <a href="<?php echo e(route('admin.carAuction.index' )); ?>" class="menu-link">
+                        <div data-i18n="List Country">List Auction</div>
                     </a>
                 </li>
             </ul>

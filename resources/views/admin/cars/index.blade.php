@@ -87,7 +87,7 @@
             if (result.isConfirmed) {
                 $.ajax({
                     method: "POST",
-                    url: "{{ route('admin.cars.destroy', '') }}/" + carId,
+                   url: "{{ url('admin/cars') }}/" + carId,
                     data: {
                         _token: '{{ csrf_token() }}',
                         _method: 'DELETE'

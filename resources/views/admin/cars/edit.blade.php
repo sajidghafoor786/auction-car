@@ -18,7 +18,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form role="form" action="{{ route('admin.cars.update', $car->id ) }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="PATCH" enctype="multipart/form-data">
+                        <form role="form" action="{{ route('admin.cars.update', $car->id ) }}" class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework ajax-form-admin" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="col-sm-6">
@@ -66,7 +66,7 @@
                                 <label class="form-label">Image</label>
                                 <input type="file" name="image" class="form-control">
                                 @if($car->image)
-                                    <img src="{{ asset('uploads/cars/' . $car->image) }}" width="100" class="mt-2" />
+                                    <img src="{{asset('storage/' . $car->image) }}" width="100" class="mt-2" />
                                 @endif
                             </div>
 
