@@ -3,30 +3,14 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\user\CartController;
-use App\Http\Controllers\user\ShopController;
-// use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\admin\ShippingCharge;
 use App\Http\Controllers\Admin;
-use App\Http\Controllers\Admin\BrandsController;
-use App\Http\Controllers\user\CheckOutController;
-// use App\Http\Controllers\Auth\RegisterController;
-
+use App\Http\Controllers;
 // user controller start 
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\admin\DiscountCoupenController;
-use App\Http\Controllers\admin\OrderController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\user\auth\LoginController;
-use App\Http\Controllers\Admin\Sub_categoryController;
 use App\Http\Controllers\user\auth\RegisterController;
-use App\Http\Controllers\admin\ShippingChargeController;
-use App\Http\Controllers\Admin\ProductSubCategoryController;
-use App\Http\Controllers\user\MyOrderController;
-use App\Http\Controllers\user\WishListController;
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -76,62 +60,15 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::delete('cars/{car}', 'Admin\CarController@destroy')->name('cars.destroy');
     Route::post('/status', 'Admin\CarController@status')->name('cars.changeStatus');
     // car auction route 
-    // Car Auction Routes (without using resource routes)
-Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
-Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
-Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
-Route::get('auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
-Route::post('car-auctions/update', 'Admin\AuctionController@update')->name('carAuction.update');
-Route::post('car-auctions/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
-Route::post('car-auctions/change-status', 'Admin\AuctionController@changeStatus')->name('carAuction.changeStatus');
-Route::get('car-auctions/{id}', 'Admin\AuctionController@show')->name('carAuction.show');
+    Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
+    Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
+    Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
+    Route::get('auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
+    Route::post('car-auctions/{auction}/update', 'Admin\AuctionController@update')->name('carAuction.update');
+    Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
+    Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
+    Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
 
-    Route::get('/sub_category', [Sub_categoryController::class, 'index'])->name('sub_category');
-    Route::POST('/sub_category/create', [Sub_CategoryController::class, 'create'])->name('sub_category.create');
-    Route::get('/sub_category/delete/{id}', [Sub_categoryController::class, 'destroy'])->name('sub_category.delete');
-    Route::get('/sub_category/edit/{id}', [Sub_categoryController::class, 'edit'])->name('sub_category.edit');
-    Route::put('/sub_category/update', [Sub_categoryController::class, 'update'])->name('sub_category.update');
-    Route::DELETE('/sub_category/deleteimage/{id}', [Sub_categoryController::class, 'deleteimage'])->name('Sub_category.deleteimage');
-    //  Brands Route 
-    Route::get('/brands', [BrandsController::class, 'index'])->name('brands');
-    Route::POST('/brands/create', [BrandsController::class, 'create'])->name('brands.create');
-    Route::get('/brands/delete/{id}', [BrandsController::class, 'destroy'])->name('brands.delete');
-    Route::get('/brands/edit/{id}', [BrandsController::class, 'edit'])->name('brands.edit');
-    Route::put('/brands/update', [BrandsController::class, 'update'])->name('brands.update');
-    Route::DELETE('/brands/deleteimage/{id}', [BrandsController::class, 'deleteimage'])->name('brands.deleteimage');
-    //  products Route 
-    Route::get('/products', [ProductsController::class, 'index'])->name('products');
-    Route::POST('/products/create', [ProductsController::class, 'create'])->name('products.create');
-    Route::get('/products/delete/{id}', [ProductsController::class, 'destroy'])->name('products.delete');
-    Route::get('/products/edit/{id}', [ProductsController::class, 'edit'])->name('products.edit');
-    Route::get('/products/test', [ProductsController::class, 'store'])->name('products.edit');
-    Route::put('/products/update', [ProductsController::class, 'update'])->name('products.update');
-    Route::get('/products/deleteimage/{id}', [ProductsController::class, 'deleteimage'])->name('products.deleteimage');
-    // Shipping cgarge routre 
-    Route::get('/shipping', [ShippingChargeController::class, 'index'])->name('shipping');
-    Route::POST('/shipping/create', [ShippingChargeController::class, 'create'])->name('shipping.create');
-    Route::get('/shipping/delete/{id}', [ShippingChargeController::class, 'destroy'])->name('shipping.destroy');
-    Route::post('/shipping/edit/{id}', [ShippingChargeController::class, 'edit'])->name('shipping.edit');
-    Route::post('/shipping/update', [ShippingChargeController::class, 'update'])->name('shipping.update');
-    // Discount Coupen routre 
-    Route::get('/coupen', [DiscountCoupenController::class, 'index'])->name('coupen');
-    Route::POST('/coupen/create', [DiscountCoupenController::class, 'create'])->name('coupen.create');
-    Route::get('/coupen/delete/{id}', [DiscountCoupenController::class, 'destroy'])->name('coupen.destroy');
-    Route::get('/coupen/edit/{id}', [DiscountCoupenController::class, 'edit'])->name('coupen.edit');
-    Route::post('/coupen/update', [DiscountCoupenController::class, 'update'])->name('coupen.update');
-    // orderList And Order Details routre 
-    Route::get('/order', [OrderController::class, 'index'])->name('orderList');
-    Route::get('/order-details/{id}', [OrderController::class, 'OrderDetails'])->name('order-detail');
-    Route::post('/order/update/{id}', [OrderController::class, 'OrderStatusUpdate'])->name('order.update');
-    Route::post('/send_invoice/{id}', [OrderController::class, 'InvoiceEmail'])->name('sendInvoce_email');
-    // All user  routre 
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
-    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/update', [UserController::class, 'update'])->name('user.update');
-    Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
-
-    // ProductSubCategory Route here 
-    Route::get('/product_sub_category', [ProductSubCategoryController::class, 'index'])->name('product_sub_category');
 });
 
 // User all route here and registration and login 
@@ -156,26 +93,11 @@ Route::group(['prefix' => 'account'], function () {
     });
 });
 // show defalte user page  
-Route::get('/', function () {
-    return view('user.index');
+Route::get('/details', function () {
+    return view('frontend.pages.auction');
 })->name('user.home');
-// shopping route  
-Route::get('shop/{categorySlug?}/{subcatgorySlug?}', [ShopController::class, 'index'])->name('user.shop');
-Route::get('product/{slug}', [ShopController::class, 'SingleProductShow'])->name('user.product');
-// cart route 
-Route::get('cart', [CartController::class, 'ShowCart'])->name('user.cart');
-Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('user.add-to-cart');
-Route::post('update-cart', [CartController::class, 'updateCart'])->name('user.update-cart');
-Route::post('delete-cart', [CartController::class, 'DeleteCart'])->name('user.delete-cart');
-// wishlist route 
-Route::post('/wishlist-added', [WishListController::class, 'WishListAdded'])->name('user.wishlist-added');
-Route::post('/wishlist-delete', [WishListController::class, 'WishListDeleted'])->name('user.delete-wislist');
+Route::get('/', 'FrontController@frontHome')->name('frontHome');
+Route::get('/auction-detail/{auction}', 'FrontController@auctionDetail')->name('auctionDetail');
+Route::post('/auction-bid', 'FrontController@auctionAddBid')->name('add-bid');
 
-//checkout route 
-Route::get('checkout-cart', [CheckOutController::class, 'CheckOut'])->name('user.checkout-cart');
-Route::post('process-checkout', [CheckOutController::class, 'ProcessCheckout'])->name('user.process-checkout');
-// onchange country shipping charges change route 
-Route::post('/shipping-ordersummery', [CheckOutController::class, 'OrderSummeryShipping'])->name('user.checkoutShipping');
-// onclick discount coupooen apply route 
-Route::get('/discount-coupen-apply', [CheckOutController::class, 'DiscountApply'])->name('user.DiscountApply');
 Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');

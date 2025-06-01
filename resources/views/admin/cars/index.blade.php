@@ -94,7 +94,7 @@
                     },
                     success: function(response) {
                         toastr.success(response.message);
-                        setTimeout(() => location.reload(), 1500);
+                        setTimeout(() => location.reload(), 3000);
                     }
                 });
             }
@@ -122,7 +122,7 @@
                     },
                     success: function(response) {
                         toastr.success(response.message);
-                        setTimeout(() => location.reload(), 1500);
+                        setTimeout(() => location.reload(), 3000);
                     }
                 });
             }

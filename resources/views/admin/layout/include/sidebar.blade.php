@@ -64,17 +64,17 @@
         <li class="menu-item {{ set_active(['admin.cars.index', 'admin.cars.create']) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Cars</div>
+                <div data-i18n="Manage Car" data-label="Manage Cars">Manage Cars</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.cars.create']) }}">
                     <a href="{{route('admin.cars.create') }}" class="menu-link">
-                        <div data-i18n="Add Country">Add Car</div>
+                        <div data-i18n="Add Car">Add Car</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.cars.index']) }}">
                     <a href="{{route('admin.cars.index' )}}" class="menu-link">
-                        <div data-i18n="List Country">List Car</div>
+                        <div data-i18n="List Car">List Car</div>
                     </a>
                 </li>
             </ul>
@@ -82,45 +82,23 @@
         <li class="menu-item {{ set_active(['admin.carAuction.index', 'admin.carAuction.create']) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Countries" data-label="Manage Countries">Manage Auction</div>
+                <div data-i18n="Manage Acution" data-label="Manage Auction">Manage Auction</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.carAuction.create']) }}">
                     <a href="{{route('admin.carAuction.create') }}" class="menu-link">
-                        <div data-i18n="Add Country">Add Acution</div>
+                        <div data-i18n="Add Acution">Add Acution</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.carAuction.index']) }}">
                     <a href="{{route('admin.carAuction.index' )}}" class="menu-link">
-                        <div data-i18n="List Country">List Auction</div>
+                        <div data-i18n="List Auction">List Auction</div>
                     </a>
                 </li>
             </ul>
         </li>
     </ul>
 </aside>
-
-{{--
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const searchInput = document.getElementById('sidebar-search');
-        searchInput.addEventListener('input', function () {
-            const search = this.value.toLowerCase();
-            const menuItems = document.querySelectorAll('#layout-menu .menu-item');
-
-            menuItems.forEach(function (item) {
-                const labelDiv = item.querySelector('[data-label]');
-                if (labelDiv) {
-                    const text = labelDiv.getAttribute('data-label').toLowerCase();
-                    item.style.display = text.includes(search) ? 'block' : 'none';
-                }
-            });
-        });
-    });
-</script>
---}}
-
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.getElementById('sidebar-search');

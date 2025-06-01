@@ -104,8 +104,8 @@ unset($__errorArgs, $__bag); ?>
                             <label class="form-label">Select Status <span class="steric">*</span></label>
                             <select name="status" class="form-control <?php echo e($errors->has('status') ? 'is-invalid' : ''); ?>">
                                 <option value="">-- Select Status --</option>
-                                <option value="active" <?php echo e(old('status') == 'active' ? 'selected' : ''); ?>> Active</option>
-                                <option value="closed" <?php echo e(old('status') == 'closed' ? 'selected' : ''); ?>> Closed</option>
+                                <option value="active" <?php echo e(old('status') == "active" ? 'selected' : ''); ?>> Active</option>
+                                <option value="closed" <?php echo e(old('status') == "closed" ? 'selected' : ''); ?>> Closed</option>
                             </select>
                             <?php $__errorArgs = ['status'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -133,17 +133,7 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startSection('script'); ?>
 <script>
-    $(document).ready(function() {
-        $('input#is_active').val('1');
-    });
-
-    $('input[name="is_active"]').change(function() {
-        if ($(this).is(":checked")) {
-            $('input#is_active').val('1');
-        } else {
-            $('input#is_active').val('0');
-        }
-    });
+  
 </script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('admin.layout.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\laragon\www\auction-car\resources\views/admin/car-auction/create.blade.php ENDPATH**/ ?>

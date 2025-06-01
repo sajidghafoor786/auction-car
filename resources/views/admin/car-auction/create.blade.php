@@ -71,8 +71,8 @@
                             <label class="form-label">Select Status <span class="steric">*</span></label>
                             <select name="status" class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}">
                                 <option value="">-- Select Status --</option>
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}> Active</option>
-                                <option value="closed" {{ old('status') == 'closed' ? 'selected' : '' }}> Closed</option>
+                                <option value="active" {{ old('status') == "active" ? 'selected' : '' }}> Active</option>
+                                <option value="closed" {{ old('status') == "closed" ? 'selected' : '' }}> Closed</option>
                             </select>
                             @error('status')
                             <span class="invalid-feedback">{{ $message }}</span>

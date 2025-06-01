@@ -87,14 +87,14 @@
             if (result.isConfirmed) {
                 $.ajax({
                     method: "POST",
-                    url: "{{ url('admin/carAuction') }}/" + auctionId,
+                    url: "{{ url('admin/car-auctions') }}/" + auctionId + '/delete',
                     data: {
                         _token: '{{ csrf_token() }}',
                         _method: 'DELETE'
                     },
                     success: function(response) {
                         toastr.success(response.message);
-                        setTimeout(() => location.reload(), 1500);
+                        setTimeout(() => location.reload(), 3000);
                     }
                 });
             }
@@ -122,7 +122,7 @@
                     },
                     success: function(response) {
                         toastr.success(response.message);
-                        setTimeout(() => location.reload(), 1500);
+                        setTimeout(() => location.reload(), 3000);
                     }
                 });
             }

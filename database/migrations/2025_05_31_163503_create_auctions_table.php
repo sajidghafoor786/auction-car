@@ -16,7 +16,7 @@ return new class extends Migration
     $table->foreignId('car_id');
     $table->foreignId('user_id')->nullable();
     $table->double('minimum_bid');
-    $table->double('current_bid')->nullable();
+    $table->double('current_bid')->nullable()->default(0);
     $table->dateTime('start_date');
     $table->dateTime('end_date');
     $table->enum('status', ['active', 'closed'])->default('active');

@@ -17,7 +17,6 @@
                 <div class="card-body">
                     <form action="{{ route('admin.carAuction.update', $auction->id) }}" method="POST" class="row g-3 ajax-form-admin">
                         @csrf
-                        @method('PUT')
                         <div class="col-sm-6">
                             <label class="form-label">Select Car <span class="steric">*</span></label>
                             <select name="car_id" class="form-control {{ $errors->has('car_id') ? 'is-invalid' : '' }}">
@@ -68,8 +67,8 @@
                             <label class="form-label">Select Status <span class="steric">*</span></label>
                             <select name="status" class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}">
                                 <option value="">-- Select Status --</option>
-                                <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}> Active</option>
-                                <option value="closed" {{ old('status') == 'closed' ? 'selected' : '' }}> Closed</option>
+                                <option value="active" {{ old('status') == "active" ? 'selected' : '' }} {{ $auction->status == "active" ? 'selected' : ''  }}> Active</option>
+                                <option value="closed" {{ old('status') == "closed" ? 'selected' : '' }} {{ $auction->status == "closed" ? 'selected' : ''  }}> Closed</option>
                             </select>
                             @error('status')
                             <span class="invalid-feedback">{{ $message }}</span>
