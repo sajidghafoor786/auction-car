@@ -21,10 +21,10 @@
                         <a class="nav-link active" aria-current="page" href="{{route('contact')}}" title="Products">Contact us </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php" title="Products"></a>
+                        <a class="nav-link active" aria-current="page" href="{{route('terms')}}" title="Products">Help</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.php" title="Products">Help</a>
+                        <a class="nav-link active" aria-current="page" href="{{route('bidding.history')}}" title="Products">My Biding</a>
                     </li>
                 </ul>
                 <div class="col-lg-6  col-6  d-flex justify-content-end align-items-center">

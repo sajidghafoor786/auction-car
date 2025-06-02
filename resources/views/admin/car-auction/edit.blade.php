@@ -48,8 +48,8 @@
 
                         <div class="col-sm-6">
                             <label class="form-label">Start Date <span class="steric">*</span></label>
-                            <input type="date" name="start_date" class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}"
-                                value="{{ old('start_date', \Carbon\Carbon::parse($auction->start_date)->format('Y-m-d')) }}">
+                            <input type="datetime-local" name="start_date" class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}"
+                                value="{{ old('start_date', \Carbon\Carbon::parse($auction->start_date)->format('Y-m-d\TH:i')) }}">
                             @error('start_date')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -57,8 +57,8 @@
 
                         <div class="col-sm-6">
                             <label class="form-label">End Date <span class="steric">*</span></label>
-                            <input type="date" name="end_date" class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}"
-                                value="{{ old('end_date', \Carbon\Carbon::parse($auction->end_date)->format('Y-m-d')) }}">
+                            <input type="datetime-local" name="end_date" class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}"
+                                value="{{ old('end_date', \Carbon\Carbon::parse($auction->end_date)->format('Y-m-d\TH:i')) }}">
                             @error('end_date')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
