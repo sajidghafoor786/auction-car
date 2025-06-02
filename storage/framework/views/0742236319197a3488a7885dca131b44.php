@@ -160,7 +160,6 @@
             <div >
                 <i class="fa fa-car me-auto" style="text-align: center; display: block;"></i>
                 <p >Auction</p>
-                <p>Car</p>
             </div>
           
             </a>
