@@ -23,8 +23,15 @@ class Auction extends Model
     return $this->belongsTo(Car::class);
   }
 
+  public function bids()
+  {
+    return $this->hasMany(Bid::class)->orderBy('bid_amount', 'desc');
+  }
+
   public function winningBid()
   {
+
     return $this->hasOne(Bid::class)->orderBy('bid_amount', 'desc');
   }
+
 }

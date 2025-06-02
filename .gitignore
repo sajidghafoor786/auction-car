@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/storage/framework/
 /storage/*.key
 /vendor
 .env
@@ -17,3 +18,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/storage/framework/*
+!/storage/framework/cache
+!/storage/framework/sessions
+!/storage/framework/views

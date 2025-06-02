@@ -14,28 +14,6 @@ E-SHOP
         </div>
     </div>
 </section>
-<style>
-    .image-zoom-wrapper {
-        overflow: hidden;
-    }
-
-    .image-zoom {
-        transition: transform 0.5s ease;
-    }
-
-    .image-zoom-wrapper:hover .image-zoom {
-        transform: scale(1.1);
-    }
-
-    .price {
-        font-family: monospace;
-    }
-
-    table th,
-    table td {
-        vertical-align: middle;
-    }
-</style>
 <section class="section-7 pt-3 mb-3">
     <div class="container">
         <div class="row">
@@ -141,48 +119,11 @@ E-SHOP
 
     </div>
 </section>
-
-{{-- latest product --}}
-<section class="pt-5 section-8">
-    <div class="container">
-        <div class="section-title">
-            <h2>Latest Auction Car</h2>
-        </div>
-        <div class="col-md-12">
-            <div id="related-products" class="carousel">
-                <div class="card product-card">
-                    <div class="product-image position-relative">
-                        <a href="#">
-                            <div style="height: 300px;">
-                                <img src="{{ asset('upload/products_img/sample.jpg') }}"
-                                    alt="Image" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        </a>
-                        <a class="whishlist" href="javascript:void(0);"><i class="far fa-heart"></i></a>
-                        <div class="product-action">
-                            <a class="btn btn-dark" href="javascript:void(0);">
-                                <i class="fa fa-shopping-cart"></i> Add To Cart
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-body text-center mt-3">
-                        <a class="h6 link" href="#">Sample Product</a>
-                        <div class="price mt-2">
-                            <span class="h6 text-underline"><del>5999</del></span>
-                            <span class="h5"><strong>4999</strong></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 @endsection
 @section('custemjs')
 <script>
     $('#bidForm').on('submit', function(e) {
         e.preventDefault();
-
         $.ajax({
             url: "{{ route('add-bid') }}",
             method: 'POST',
@@ -190,7 +131,6 @@ E-SHOP
             success: function(response) {
                 toastr.success(response.message);
                 $('#bidMessage').addClass('d-none');
-
             },
             error: function(xhr) {
                 const res = xhr.responseJSON;

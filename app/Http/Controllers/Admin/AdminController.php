@@ -22,7 +22,7 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::query()
-            ->orderBy('id', 'DESC')       // Within each group, latest first
+            ->orderBy('id', 'DESC')
             ->get();
         return view('admin.admin-user.index', ['users' => $users]);
     }

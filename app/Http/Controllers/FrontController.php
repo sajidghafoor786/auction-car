@@ -14,15 +14,30 @@ use Illuminate\Support\Facades\DB;
 class FrontController extends Controller
 {
 
-    public function frontHome()
+    public function frontHome(Request $request)
     {
-        $activeAuctions = Auction::with('car')
-            ->where('status', 'active')
-            ->orderBy('start_date', 'desc')
-            ->get();
-
+        $activeAuctions = Auction::with('car')->where('status', 'active')->orderBy('start_date', 'desc')->get();
+        // dd($activeAuctions);
         return view("frontend.index", compact('activeAuctions'));
     }
+    public function ajaxHomeSearch(Request $request)
+    {
+        $query = Auction::with('car')->where('status', 'active');
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->whereHas('car', function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
+        $auctions = $query->orderBy('start_date', 'desc')->get();
+
+        $html = view('frontend.include._auction-cards', compact('auctions'))->render();
+
+        return response()->json(['html' => $html]);
+    }
+
     public function auctionDetail(Auction $auction)
     {
         $auction->load('car');
@@ -50,34 +65,28 @@ class FrontController extends Controller
             return Response::json(['status' => 'error', 'message' => 'Auction not found.'], 404);
         }
 
-        // Check for existing bids
+        // Check latestBid 
         $latestBid = Bid::where('auction_id', $auction->id)->orderBy('id', 'desc')->first();
-
-        // Initial bid check
         if (!$latestBid) {
             if ($request->bid_amount < $auction->minimum_bid) {
                 return Response::json(['status' => 'error', 'message' => 'Your bid must be at least the minimum bid.'], 422);
             }
         } else {
-            // Bid must be higher than current
             if ($request->bid_amount <= $latestBid->bid_amount) {
                 return Response::json(['status' => 'error', 'message' => 'Please enter an amount higher than the current maximum bid.'], 422);
             }
 
-            // Prevent same user from bidding again until outbid
             if ($latestBid->user_id == $user->id) {
                 return Response::json(['status' => 'error', 'message' => 'You already have the highest bid. Wait until someone outbids you.'], 422);
             }
         }
 
-        // Save new bid
         Bid::create([
             'auction_id' => $auction->id,
             'user_id' => $user->id,
             'bid_amount' => $request->bid_amount,
         ]);
 
-        // Update auction current bid
         $auction->current_bid = $request->bid_amount;
         $auction->update();
 
@@ -87,13 +96,11 @@ class FrontController extends Controller
     {
         $user = auth()->user();
 
-        // Get user's bids with related auction and car
         $bids = Bid::with(['auction.car'])
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')
             ->get();
 
-        // Get all ended auctions and their highest bids
         $endedAuctions = Bid::select('auction_id', DB::raw('MAX(bid_amount) as max_bid'))
             ->whereHas('auction', function ($query) {
                 $query->where('end_date', '<', Carbon::now());

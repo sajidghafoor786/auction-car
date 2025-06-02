@@ -1,0 +1,213 @@
+  .btn:focus,
+  .btn:active {
+      outline: none !important;
+      box-shadow: none !important;
+  }
+
+  /* custom.css */
+  input.form-control {
+      box-shadow: none !important;
+      outline: none !important;
+  }
+
+  .form-check-input {
+      box-shadow: none !important;
+      outline: none !important;
+  }
+
+  .btn:focus,
+  .btn:active {
+      outline: none !important;
+      box-shadow: none !important;
+  }
+
+  .page-item,
+  .page-link {
+      box-shadow: none !important;
+      outline: none !important;
+  }
+
+
+  .toast {
+
+      margin-top: 10px !important;
+      background-color: #4CAF50 !important;
+      /* Set your desired background color */
+      color: #fff !important;
+      /* Set the text color to ensure visibility */
+      /* white-space: nowrap !important; 
+             overflow: hidden !important; */
+  }
+
+  .toast-error {
+      background-color: #dc3545 !important;
+      color: #fff !important;
+      /* width: 370px !important; */
+  }
+
+  .toast-info {
+      background-color: #17a2b8 !important;
+      color: #fff !important;
+      /* Set the text color to ensure visibility */
+      /* white-space: nowrap !important;
+            overflow: hidden !important; */
+  }
+
+  .toast-warning {
+      background-color: #dc3545 !important;
+
+  }
+
+  .CartIcon {
+      border-radius: 60% !important;
+      /* padding: 7px !important; */
+      font-size: 12px !important;
+
+  }
+
+  .wishIcon {
+      margin-left: 50px !important;
+  }
+
+  #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+  }
+
+  .spinner-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .spinner {
+      position: absolute;
+      width: 80px;
+      /* bigger than text */
+      height: 80px;
+      border: 6px solid rgb(255, 217, 0);
+      /* yellow border */
+      border-top: 6px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      z-index: 1;
+  }
+
+  .spinner-text {
+      position: relative;
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+  }
+
+  @keyframes spin {
+      0% {
+          transform: rotate(0deg);
+      }
+
+      100% {
+          transform: rotate(360deg);
+      }
+  }
+
+  .auction-card {
+      transition: all 0.3s ease;
+  }
+
+  .auction-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .image-hover img {
+      padding: 15px;
+      transition: padding 0.4s ease;
+  }
+
+  .image-hover:hover img {
+      padding: 0px;
+
+  }
+
+  .auction span,
+  .auction p {
+      font-size: 11px;
+      
+  }
+
+  .auction i {
+      font-size: 11px;
+  }
+
+  .card-body {
+      padding-bottom: 0px !important;
+  }
+
+  a:hover {
+      cursor: pointer;
+  }
+
+  .image-zoom-wrapper {
+      overflow: hidden;
+  }
+
+  .image-zoom {
+      transition: transform 0.5s ease;
+  }
+
+  .image-zoom-wrapper:hover .image-zoom {
+      transform: scale(1.1);
+  }
+
+  .price {
+      
+  }
+
+  table th,
+  table td {
+      vertical-align: middle;
+  }
+
+   header {
+        background: linear-gradient(to right, #FFD700, #000000); /* Yellow to Black */
+        padding: 10px 0px;
+    }
+
+    .search-form input {
+        border: none;
+        border-radius: 20px;
+        padding: 6px 12px;
+        background-color: #fff;
+        transition: 0.3s;
+    }
+
+    .search-form input:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(255, 215, 0, 0.8); /* Yellow glow */
+    }
+
+    .search-form button {
+        border-radius: 20px;
+        padding: 6px 14px;
+        background-color: #000;
+        border: none;
+        color: #fff;
+    }
+
+    .search-form button:hover {
+        background-color: #FFD700;
+        color: #000;
+    }

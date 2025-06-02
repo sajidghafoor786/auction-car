@@ -1,5 +1,4 @@
-
-<header class="py-3" style="background: linear-gradient(to right, #FFD700, #000000); padding: 10px 0;">
+<header class="py-3" >
     <div class="container">
         <nav class="navbar navbar-expand-xl" id="navbar">
             <div class="col-lg-4 logo">
@@ -14,7 +13,7 @@
                 <i class="navbar-toggler-icon fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
                     </li>
@@ -30,21 +29,47 @@
                 </ul>
                 <div class="col-lg-6  col-6  d-flex justify-content-end align-items-center">
                     @if (Auth::check())
-                        <a href="{{ route('user.profile') }}" class="nav-link text-white "><b>{{auth()->user()->name}} </b></a>
+                        <a href="{{ route('user.profile') }}" class="nav-link text-white "><b>{{ auth()->user()->name }}
+                            </b></a>
                     @else
-                        <a href="{{ route('user.login') }}" class="nav-link text-white me-2 justify-content-start d-flex"><i class="far fa-user me-1"></i> Login</a>
+                        <a href="{{ route('user.login') }}"
+                            class="nav-link text-white me-2 justify-content-start d-flex"><i
+                                class="far fa-user me-1"></i> Login</a>
                     @endif
 
-                    <!-- <form action="{{ url('/') }}" method="GET" class="d-flex">
-                        <input type="text" placeholder="Search For Products" value="{{ Request::get('Search') }}"
-                            class="form-control form-control-sm me-1" name="Search">
-                        <button type="submit" class="btn btn-sm btn-dark">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </form> -->
+                    <form action="{{ url('/') }}" method="GET" class="d-flex search-form w-50">
+                        <input type="text" placeholder="Search For Car" value="{{ Request::get('Search') }}"
+                            class="form-control form-control-sm me-1 py-2" name="Search" id="searchInput" >
+                        
+                    </form>
+                    
                 </div>
             </div>
 
         </nav>
     </div>
 </header>
+@section('custemjs')
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                var searchQuery = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('ajax.search.auctions') }}',
+                    method: 'GET',
+                    data: {
+                        search: searchQuery
+                    },
+                    success: function(response) {
+                     $('#activeAuctions').empty();
+                        $('#activeAuctions').html(response.html);
+                    },
+                    error: function(xhr) {
+                        console.log("Error: ", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+@endsection
