@@ -3,75 +3,78 @@
     Auction-Car
 @endsection
 @section('content')
- <section class="section-1">
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel"
-        data-bs-interval="false">
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <picture>
-                    <source media="(max-width: 799px)" srcset="assets/images/slider1.webp" />
-                    <source media="(min-width: 800px)" srcset="assets/images/slider1.webp" />
-                    <img src="assets/images/slider1.webp" alt="Auction Car Slide 1" />
-                </picture>
+    <section class="section-1">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel"
+            data-bs-interval="false">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <picture>
+                        <source media="(max-width: 799px)" srcset="assets/images/slider1.webp" />
+                        <source media="(min-width: 800px)" srcset="assets/images/slider1.webp" />
+                        <img src="assets/images/slider1.webp" alt="Auction Car Slide 1" />
+                    </picture>
 
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3">
-                        <h1 class="display-4 text-white mb-3">Live Car Auctions</h1>
-                        <p class="mx-md-5 px-5">Bid on premium cars in real-time and drive home your dream ride at unbeatable prices.</p>
-                        <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Browse Auctions</a>
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3">
+                            <h1 class="display-4 text-white mb-3">Live Car Auctions</h1>
+                            <p class="mx-md-5 px-5">Bid on premium cars in real-time and drive home your dream ride at
+                                unbeatable prices.</p>
+                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Browse Auctions</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <picture>
+                        <source media="(max-width: 799px)" srcset="assets/images/slider2.jpg" />
+                        <source media="(min-width: 800px)" srcset="assets/images/slider2.jpg" />
+                        <img src="assets/images/slider2.jpg" alt="Auction Car Slide 2" />
+                    </picture>
+
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3">
+                            <h1 class="display-4 text-white mb-3">Verified Vehicles Only</h1>
+                            <p class="mx-md-5 px-5">Every car is inspected and verified before listing. No surprises—only
+                                trusted deals.</p>
+                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">View Verified Cars</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <picture>
+                        <source media="(max-width: 799px)" srcset="assets/images/slider3.webp" />
+                        <source media="(min-width: 800px)" srcset="assets/images/slider3.webp" />
+                        <img src="assets/images/slider3.webp" alt="Auction Car Slide 3" />
+                    </picture>
+
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3">
+                            <h1 class="display-4 text-white mb-3">Winning Deals Daily</h1>
+                            <p class="mx-md-5 px-5">Don't miss your chance! New auctions open daily. Be the highest bidder
+                                and win!</p>
+                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Start Bidding</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <picture>
-                    <source media="(max-width: 799px)" srcset="assets/images/slider2.jpg" />
-                    <source media="(min-width: 800px)" srcset="assets/images/slider2.jpg" />
-                    <img src="assets/images/slider2.jpg" alt="Auction Car Slide 2" />
-                </picture>
-
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3">
-                        <h1 class="display-4 text-white mb-3">Verified Vehicles Only</h1>
-                        <p class="mx-md-5 px-5">Every car is inspected and verified before listing. No surprises—only trusted deals.</p>
-                        <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">View Verified Cars</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <picture>
-                    <source media="(max-width: 799px)" srcset="assets/images/slider3.webp" />
-                    <source media="(min-width: 800px)" srcset="assets/images/slider3.webp" />
-                    <img src="assets/images/slider3.webp" alt="Auction Car Slide 3" />
-                </picture>
-
-                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                    <div class="p-3">
-                        <h1 class="display-4 text-white mb-3">Winning Deals Daily</h1>
-                        <p class="mx-md-5 px-5">Don't miss your chance! New auctions open daily. Be the highest bidder and win!</p>
-                        <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Start Bidding</a>
-                    </div>
-                </div>
-            </div>
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-    </div>
-</section>
+    </section>
 
     <section class="section-2">
         <div class="container">
@@ -118,7 +121,7 @@
                                     <img src="{{ $image ? asset('storage/' . $image) : asset('images/default-car.jpg') }}"
                                         alt="Car Image" class="w-100 h-100" style="object-fit: cover;">
                                 </div>
-                                <div class="card-body text-center">                                      
+                                <div class="card-body text-center">
                                     <a href="link h6 text-dark">{{ $auction->car->name }}</a>
                                     <div class="d-flex auction justify-content-between">
                                         <div class="mb-2">
@@ -135,7 +138,8 @@
                                             <i class="fas fa-calendar-alt me-1 "></i>
                                             <span class="text-dark">Date /Time </span>
                                             <p class="text-dark">
-                                                {{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y h:i A') }} </p>
+                                                {{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y h:i A') }}
+                                            </p>
                                         </div>
                                     </div>
                                     <a href="{{ route('auctionDetail', $auction->id) }}" class="btn btn-primary btn mt-2">
@@ -153,4 +157,27 @@
             </div>
         </div>
     </section>
+@endsection
+@section('custemjs')
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                var searchQuery = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('ajax.search.auctions') }}',
+                    method: 'GET',
+                    data: {
+                        search: searchQuery
+                    },
+                    success: function(response) {
+                        $('.row.pb-3').html(response.html);
+                    },
+                    error: function(xhr) {
+                        console.log("Error: ", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

@@ -67,11 +67,11 @@ Route::group(['prefix' => 'account'], function () {
     // this is guest route 
     Route::group(['middleware' => 'guest'], function () {
         // register route 
-        Route::get('/register', [RegisterController::class, 'register'])->name('user.register');
-        Route::post('/process-register', [RegisterController::class, 'ProcessRegister'])->name('user.process-register');
+        Route::get('/register', 'RegisterController@register')->name('user.register');
+        Route::post('/process-register', 'RegisterController@ProcessRegister')->name('user.process-register');
         //    login route 
-        Route::get('/login', [LoginController::class, 'login'])->name('user.login');
-        Route::post('/authenticate-process', [LoginController::class, 'AuthenticateProcess'])->name('user.authenticate-process');
+        Route::get('/login', 'LoginController@login')->name('user.login');
+        Route::post('/authenticate-process', 'LoginController@AuthenticateProcess')->name('user.authenticate-process');
     });
     // this is authenticated route
     Route::group(['middleware' => 'auth'], function () {
@@ -93,4 +93,5 @@ Route::group(['prefix' => 'account'], function () {
 //     return view('frontend.pages.auction');
 // })->name('user.home');
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
+Route::get('/ajax-search-auctions','FrontController@ajaxHomeSearch')->name('ajax.search.auctions');
 Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');

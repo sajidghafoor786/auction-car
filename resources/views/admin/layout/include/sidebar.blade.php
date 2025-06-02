@@ -2,7 +2,7 @@
     <div class="app-brand demo mt-2">
         <a href="" class="app-brand-link">
             <span class="app-brand-logo demo mb-2">
-                <a href="{{ route('user.home') }}" class="text-decoration-none text-dark fw-bold fs-5">
+                <a href="{{ route('admin.dashboard') }}" class="text-decoration-none text-dark fw-bold fs-5">
                     <i class="fa fa-car me-2 text-dark"></i> Auction Car
                 </a>
             </span>
