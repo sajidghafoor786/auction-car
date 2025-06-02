@@ -61,60 +61,63 @@
             <span class="menu-header-text">Misc</span>
         </li>
 
-        <li class="menu-item {{ set_active(['admin.cars.index', 'admin.cars.create']) }}">
+        <li class="menu-item {{ set_active(['admin.cars.index', 'admin.cars.create'], 'open') }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Car" data-label="Manage Cars">Manage Cars</div>
+                <i class="menu-icon tf-icons bx bx-car"></i>
+                <div data-i18n="Manage Car">Manage Cars</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.cars.create']) }}">
-                    <a href="{{route('admin.cars.create') }}" class="menu-link">
+                    <a href="{{ route('admin.cars.create') }}" class="menu-link">
                         <div data-i18n="Add Car">Add Car</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.cars.index']) }}">
-                    <a href="{{route('admin.cars.index' )}}" class="menu-link">
+                    <a href="{{ route('admin.cars.index') }}" class="menu-link">
                         <div data-i18n="List Car">List Car</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ set_active(['admin.carAuction.index', 'admin.carAuction.create']) }}">
+
+        <li class="menu-item {{ set_active(['admin.carAuction.index', 'admin.carAuction.create'], 'open') }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Acution" data-label="Manage Auction">Manage Auctions</div>
+              	<i class="menu-icon tf-icons bx bx-task"></i>
+                <div data-i18n="Manage Auction">Manage Auctions</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.carAuction.create']) }}">
-                    <a href="{{route('admin.carAuction.create') }}" class="menu-link">
-                        <div data-i18n="Add Acution">Add Acutions</div>
+                    <a href="{{ route('admin.carAuction.create') }}" class="menu-link">
+                        <div data-i18n="Add Auction">Add Auction</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.carAuction.index']) }}">
-                    <a href="{{route('admin.carAuction.index' )}}" class="menu-link">
-                        <div data-i18n="List Auction">List Auctions</div>
+                    <a href="{{ route('admin.carAuction.index') }}" class="menu-link">
+                        <div data-i18n="List Auctions">List Auctions</div>
                     </a>
                 </li>
             </ul>
         </li>
-        <li class="menu-item {{ set_active(['admin.bid.index', 'admin.bid.create']) }}">
+
+        <li class="menu-item {{ set_active(['admin.bid.index', 'admin.bid.create'], 'open') }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Bid" data-label="Manage Auction">Manage Bids</div>
+                <i class="menu-icon tf-icons bx bx-money"></i>
+                <div data-i18n="Manage Bid">Manage Bids</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.bid.create']) }}">
-                    <a href="{{route('admin.bid.create') }}" class="menu-link">
+                    <a href="{{ route('admin.bid.create') }}" class="menu-link">
                         <div data-i18n="Add Bid">Add Bid</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.bid.index']) }}">
-                    <a href="{{route('admin.bid.index' )}}" class="menu-link">
-                        <div data-i18n="List Bid">List Bid</div>
+                    <a href="{{ route('admin.bid.index') }}" class="menu-link">
+                        <div data-i18n="List Bids">List Bids</div>
                     </a>
                 </li>
             </ul>
         </li>
+
     </ul>
 </aside>
 <script>
