@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
 @section('title')
-E-SHOP
+Car Auction | Auction Detail
 @endsection
 @section('content')
 <section class="section-5 pt-3 pb-3 mb-3 bg-white">
@@ -131,6 +131,7 @@ E-SHOP
             success: function(response) {
                 toastr.success(response.message);
                 $('#bidMessage').addClass('d-none');
+                setTimeout(() => location.reload(), 5000);
             },
             error: function(xhr) {
                 const res = xhr.responseJSON;

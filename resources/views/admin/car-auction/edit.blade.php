@@ -19,10 +19,10 @@
                         @csrf
                         <div class="col-sm-6">
                             <label class="form-label">Select Car <span class="steric">*</span></label>
-                            <select name="car_id" class="form-control {{ $errors->has('car_id') ? 'is-invalid' : '' }}">
+                            <select name="car_id" class="form-control {{ $errors->has('car_id') ? 'is-invalid' : '' }}" required>
                                 <option value="">-- Select Car --</option>
                                 @foreach($cars as $car)
-                                <option value="{{ $car->id }}" {{ old('car_id') == $car->id ? 'selected' : '' }} {{ $car->id == $auction->car_id ?'selected' : '' }}>
+                                <option value="{{ $car->id }}" {{ old('car_id') == $car->id ? 'selected' : '' }} {{ $car->id == $auction->car_id ? 'selected' : '' }}>
                                     {{ $car->name }} ({{ $car->make }} - {{ $car->model }})
                                 </option>
                                 @endforeach

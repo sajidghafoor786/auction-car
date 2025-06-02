@@ -15,11 +15,11 @@
                 <div class="footer-card">
                     <h3>Important Links</h3>
                     <ul>
-                        <li><a href="about-us.php" title="About">About</a></li>
-                        <li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>
-                        <li><a href="#" title="Privacy">Privacy</a></li>
-                        <li><a href="#" title="Privacy">Terms & Conditions</a></li>
-                        <li><a href="#" title="Privacy">Refund Policy</a></li>
+                        <li><a href="<?php echo e(url('/')); ?>" title="About">Home</a></li>
+                        <li><a href="<?php echo e(route('privacy')); ?>" title="Privacy">Privacy</a></li>
+                        <li><a href="<?php echo e(route('terms')); ?>" title="Privacy">Terms & Conditions</a></li>
+                        <li><a href="<?php echo e(route('contact')); ?>" title="Privacy">Contact Us</a></li>
+                     
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <ul>
                         <li><a href="<?php echo e(route('user.login')); ?>" title="Sell">Login</a></li>
                         <li><a href="<?php echo e(route('user.register')); ?>" title="Advertise">Register</a></li>
-                        <li><a href="" title="Contact Us">My Orders</a></li>
+                        <li><a href="<?php echo e(route('bidding.history')); ?>" title="Contact Us">My Biding</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     <div class="copy-right text-center">
-                        <p>© Copyright 2022 Amazing Shop. All Rights Reserved</p>
+                        <p>© Copyright 2022 sajid ghafoor. All Rights Reserved</p>
                     </div>
                 </div>
             </div>

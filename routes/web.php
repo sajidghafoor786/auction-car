@@ -78,4 +78,15 @@ Route::group(['prefix' => 'account'], function () {
 
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
 Route::get('/ajax-search-auctions', 'FrontController@ajaxHomeSearch')->name('ajax.search.auctions');
-// Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');
+// static page
+Route::get('/terms-and-conditions', function () {
+    return view('frontend.terms-&-conditions');
+})->name('terms');
+
+Route::get('/privacy-policy', function () {
+    return view('frontend.privacy-policy');
+})->name('privacy');
+
+Route::get('/contact-us', function () {
+    return view('frontend.contact-us');
+})->name('contact');

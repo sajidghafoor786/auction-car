@@ -18,10 +18,6 @@
      <section class=" section-10">
          <div class="container">
               <div class="offset-5 col-lg-4">
-
-                <img src="{{ asset('admin-2/assets-2/logo/logo-2.png') }}"
-                    style="height: 150px; width: 200px;object-fit: cover; ">
-
             </div>
              <div class="login-form">
                  <form role="form" class="text-start" method="POST" action="{{route('user.process-register')}}">
