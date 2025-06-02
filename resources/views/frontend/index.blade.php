@@ -111,11 +111,11 @@
             <div class="section-title mb-4">
                 <h2 class="text-dark">Car Auctions</h2>
             </div>
-            <div class="row pb-3">
+            <div class="row pb-3" id="activeAuctions">
                 @if ($activeAuctions->isNotEmpty())
                     @foreach ($activeAuctions as $auction)
                         <div class="col-md-3 mb-4">
-                            <div class="card auction-card border-0 shadow rounded-3 h-100">
+                            <div class="card auction-card border-0 shadow rounded-3 h-100 mb-3">
                                 <div class="position-relative image-hover" style="height: 250px; overflow: hidden;">
                                     @php $image = $auction->car->image ?? null; @endphp
                                     <img src="{{ $image ? asset('storage/' . $image) : asset('images/default-car.jpg') }}"
@@ -157,27 +157,4 @@
             </div>
         </div>
     </section>
-@endsection
-@section('custemjs')
-    <script>
-        $(document).ready(function() {
-            $('#searchInput').on('input', function() {
-                var searchQuery = $(this).val();
-
-                $.ajax({
-                    url: '{{ route('ajax.search.auctions') }}',
-                    method: 'GET',
-                    data: {
-                        search: searchQuery
-                    },
-                    success: function(response) {
-                        $('.row.pb-3').html(response.html);
-                    },
-                    error: function(xhr) {
-                        console.log("Error: ", xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

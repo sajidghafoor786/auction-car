@@ -1,7 +1,7 @@
 @if ($auctions->isNotEmpty())
     @foreach ($auctions as $auction)
         <div class="col-md-3 mb-4">
-            <div class="card auction-card border-0 shadow rounded-3 h-100">
+            <div class="card auction-card border-0 shadow rounded-3 h-100 mb-3">
                 <div class="position-relative image-hover" style="height: 250px; overflow: hidden;">
                     @php $image = $auction->car->image ?? null; @endphp
                     <img src="{{ $image ? asset('storage/' . $image) : asset('images/default-car.jpg') }}"

@@ -1,4 +1,4 @@
-<header class="py-3" style="background: linear-gradient(to right, #FFD700, #000000); padding: 10px 0;">
+<header class="py-3" >
     <div class="container">
         <nav class="navbar navbar-expand-xl" id="navbar">
             <div class="col-lg-4 logo">
@@ -37,14 +37,39 @@
                                 class="far fa-user me-1"></i> Login</a>
                     @endif
 
-                    <form action="{{ url('/') }}" method="GET" class="d-flex">
-                        <input type="text" placeholder="Search For Products" value="{{ Request::get('Search') }}"
-                            class="form-control form-control-sm me-1" name="Search" id="searchInput">
+                    <form action="{{ url('/') }}" method="GET" class="d-flex search-form w-50">
+                        <input type="text" placeholder="Search For Car" value="{{ Request::get('Search') }}"
+                            class="form-control form-control-sm me-1 py-2" name="Search" id="searchInput" >
                         
                     </form>
+                    
                 </div>
             </div>
 
         </nav>
     </div>
 </header>
+@section('custemjs')
+    <script>
+        $(document).ready(function() {
+            $('#searchInput').on('input', function() {
+                var searchQuery = $(this).val();
+
+                $.ajax({
+                    url: '{{ route('ajax.search.auctions') }}',
+                    method: 'GET',
+                    data: {
+                        search: searchQuery
+                    },
+                    success: function(response) {
+                     $('#activeAuctions').empty();
+                        $('#activeAuctions').html(response.html);
+                    },
+                    error: function(xhr) {
+                        console.log("Error: ", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+@endsection

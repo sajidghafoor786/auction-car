@@ -24,16 +24,14 @@ class FrontController extends Controller
     {
         $query = Auction::with('car')->where('status', 'active');
 
-
-        if ($request->has('Search') && $request->Search != '') {
-            $search = $request->Search;
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
             $query->whereHas('car', function ($q) use ($search) {
                 $q->where('name', 'like', '%' . $search . '%');
             });
         }
 
         $auctions = $query->orderBy('start_date', 'desc')->get();
-
 
         $html = view('frontend.include._auction-cards', compact('auctions'))->render();
 
