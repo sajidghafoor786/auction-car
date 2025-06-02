@@ -71,10 +71,10 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
 
 });
 
-// User all route here and registration and login 
+// User all route here for registration and login 
 Route::group(['prefix' => 'account'], function () {
     Route::group(['middleware' => 'guest'], function () {
-        // this route before authenticated accessable
+        // this route before authenticated access
         // register route 
         Route::get('/register', [RegisterController::class, 'register'])->name('user.register');
         Route::post('/process-register', [RegisterController::class, 'ProcessRegister'])->name('user.process-register');
