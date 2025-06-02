@@ -60,6 +60,15 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
     Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
     Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
+    // create auction route 
+    Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
+    Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
+    Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
+    Route::get('auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
+    Route::post('car-auctions/{auction}/update', 'Admin\AuctionController@update')->name('carAuction.update');
+    Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
+    Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
+    Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
 });
 
 // all frontend route define here
