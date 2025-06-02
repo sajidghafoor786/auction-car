@@ -103,44 +103,6 @@
             </div>
         </div>
     </section>
-    <style>
-        .product-card {
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .iamge-hover img {
-            padding: 15px;
-            transition: padding 0.4s ease;
-        }
-
-        .iamge-hover:hover img {
-            padding: 0px;
-
-        }
-
-        .auction span,
-        .auction p {
-            font-size: 11px;
-            font-family: monospace;
-        }
-
-        .auction i {
-            font-size: 11px;
-        }
-
-        .card-body {
-            padding-bottom: 0px !important;
-        }
-
-        a:hover {
-            cursor: pointer;
-        }
-    </style>
     <section class="section-4 pt-5">
         <div class="container">
             <div class="section-title mb-4">
@@ -150,18 +112,13 @@
                 @if ($activeAuctions->isNotEmpty())
                     @foreach ($activeAuctions as $auction)
                         <div class="col-md-3 mb-4">
-                            <div class="card product-card border-0 shadow rounded-3 h-100">
-                                <div class="position-relative iamge-hover" style="height: 250px; overflow: hidden;">
+                            <div class="card auction-card border-0 shadow rounded-3 h-100">
+                                <div class="position-relative image-hover" style="height: 250px; overflow: hidden;">
                                     @php $image = $auction->car->image ?? null; @endphp
                                     <img src="{{ $image ? asset('storage/' . $image) : asset('images/default-car.jpg') }}"
                                         alt="Car Image" class="w-100 h-100" style="object-fit: cover;">
                                 </div>
-                                <div class="card-body text-center">
-                                    <!-- <div class="mb-2 text-secondary">
-                                        <i class="fas fa-calendar-alt me-1 text-primary"></i>
-                                        <strong class="text-dark">Start:</strong>
-                                        {{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y h:i A') }}
-                                    </div> -->
+                                <div class="card-body text-center">                                      
                                     <a href="link h6 text-dark">{{ $auction->car->name }}</a>
                                     <div class="d-flex auction justify-content-between">
                                         <div class="mb-2">
@@ -176,9 +133,9 @@
                                         </div>
                                         <div class="mb-2 justify-content-start ms-2">
                                             <i class="fas fa-calendar-alt me-1 "></i>
-                                            <span class="text-dark">Date</span>
+                                            <span class="text-dark">Date /Time </span>
                                             <p class="text-dark">
-                                                {{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y') }} </p>
+                                                {{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y h:i A') }} </p>
                                         </div>
                                     </div>
                                     <a href="{{ route('auctionDetail', $auction->id) }}" class="btn btn-primary btn mt-2">
@@ -196,6 +153,4 @@
             </div>
         </div>
     </section>
-
-
 @endsection

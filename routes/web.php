@@ -32,9 +32,9 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // admin deshboard route in whitch  isAdmin middleware 
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
-    // Define admin routes 
+    // admin Dashboard routes 
     Route::get('/dashboard', 'Admin\AdminController@Dashboard')->name('dashboard');
-    // user & admin list route 
+    // manage user for admin side route 
     Route::get('/admin-list', 'Admin\AdminController@index')->name('listUsers');
     Route::get('/create', 'Admin\AdminController@create')->name('createUser');
     Route::post('/save', 'Admin\AdminController@save')->name('saveUser');
@@ -43,14 +43,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/view/{id}', 'Admin\AdminController@show')->name('viewUser');
     Route::post('/delete', 'Admin\AdminController@destroy')->name('deleteUser');
     Route::post('/status', 'Admin\AdminController@status')->name('changeStatus');
-    //  category Route 
-    Route::get('/category', [CategoryController::class, 'index'])->name('category');
-    Route::POST('/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::get('/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
-    Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::put('/category/update', [CategoryController::class, 'update'])->name('category.update');
-    Route::DELETE('/category/deleteimage/{id}', [CategoryController::class, 'deleteimage'])->name('category.deleteimage');
-    //  car route Route 
+    // create auction car route 
     Route::get('cars', 'Admin\CarController@index')->name('cars.index');
     Route::get('cars/create', 'Admin\CarController@create')->name('cars.create');
     Route::post('cars', 'Admin\CarController@store')->name('cars.store');
@@ -59,7 +52,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::post('cars/update', 'Admin\CarController@update')->name('cars.update');
     Route::delete('cars/{car}', 'Admin\CarController@destroy')->name('cars.destroy');
     Route::post('/status', 'Admin\CarController@status')->name('cars.changeStatus');
-    // car auction route 
+    // create auction route 
     Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
     Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
     Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
@@ -68,13 +61,12 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
     Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
     Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
-
 });
 
-// User all route here for registration and login 
+// all frontend route define here
 Route::group(['prefix' => 'account'], function () {
+    // this is guest route 
     Route::group(['middleware' => 'guest'], function () {
-        // this route before authenticated access
         // register route 
         Route::get('/register', [RegisterController::class, 'register'])->name('user.register');
         Route::post('/process-register', [RegisterController::class, 'ProcessRegister'])->name('user.process-register');
@@ -82,27 +74,24 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('/login', [LoginController::class, 'login'])->name('user.login');
         Route::post('/authenticate-process', [LoginController::class, 'AuthenticateProcess'])->name('user.authenticate-process');
     });
+    // this is authenticated route
     Route::group(['middleware' => 'auth'], function () {
         // this route after authenticated accessable
         Route::get('/logout', [LoginController::class, 'LogOut'])->name('user.logout');
         Route::get('/profile', [LoginController::class, 'profile'])->name('user.profile');
         Route::post('/profile', [LoginController::class, 'profileUpdate'])->name('user.profileUpdate');
-       
+        // reset password route
         Route::get('/reset-password', [LoginController::class, 'resetFormShow'])->name('user.resetFormShow');
-       Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('user.reset-password');
-        Route::get('/order', [MyOrderController::class, 'MyOrder'])->name('user.MyOrder');
-        Route::get('/order-details/{id}', [MyOrderController::class, 'MyOrderDetails'])->name('user.MyOrderDetails');
-        // wishlist route 
-        Route::get('/wishlist', [WishListController::class, 'index'])->name('user.wishlist');
+        Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('user.reset-password');
+        // auction route for after auth access login required
+        Route::get('/auction-detail/{auction}', 'FrontController@auctionDetail')->name('auctionDetail');
+        Route::post('/auction-bid', 'FrontController@auctionAddBid')->name('add-bid');
+        Route::get('/auction-biding-history', 'FrontController@myBidHistory')->name('bidding.history');
     });
 });
 // show defalte user page  
-Route::get('/details', function () {
-    return view('frontend.pages.auction');
-})->name('user.home');
+// Route::get('/details', function () {
+//     return view('frontend.pages.auction');
+// })->name('user.home');
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
-Route::get('/auction-detail/{auction}', 'FrontController@auctionDetail')->name('auctionDetail');
-Route::post('/auction-bid', 'FrontController@auctionAddBid')->name('add-bid');
-Route::get('/auction-biding-history', 'FrontController@myBidHistory')->name('bidding.history');
-
 Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');

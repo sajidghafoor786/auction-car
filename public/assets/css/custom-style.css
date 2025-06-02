@@ -122,3 +122,60 @@
           transform: rotate(360deg);
       }
   }
+
+  .auction-card {
+      transition: all 0.3s ease;
+  }
+
+  .auction-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .image-hover img {
+      padding: 15px;
+      transition: padding 0.4s ease;
+  }
+
+  .image-hover:hover img {
+      padding: 0px;
+
+  }
+
+  .auction span,
+  .auction p {
+      font-size: 11px;
+      font-family: monospace;
+  }
+
+  .auction i {
+      font-size: 11px;
+  }
+
+  .card-body {
+      padding-bottom: 0px !important;
+  }
+
+  a:hover {
+      cursor: pointer;
+  }
+     .image-zoom-wrapper {
+        overflow: hidden;
+    }
+
+    .image-zoom {
+        transition: transform 0.5s ease;
+    }
+
+    .image-zoom-wrapper:hover .image-zoom {
+        transform: scale(1.1);
+    }
+
+    .price {
+        font-family: monospace;
+    }
+
+    table th,
+    table td {
+        vertical-align: middle;
+    }
