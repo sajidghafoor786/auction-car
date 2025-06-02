@@ -14,15 +14,22 @@ use Illuminate\Support\Facades\DB;
 class FrontController extends Controller
 {
 
-    public function frontHome()
-    {
-        $activeAuctions = Auction::with('car')
-            ->where('status', 'active')
-            ->orderBy('start_date', 'desc')
-            ->get();
+   public function frontHome(Request $request)
+{
+    $query = Auction::with('car')->where('status', 'active');
 
-        return view("frontend.index", compact('activeAuctions'));
+    if ($request->has('Search') && $request->Search != '') {
+        $search = $request->Search;
+        $query->whereHas('car', function ($q) use ($search) {
+            $q->where('name', 'like', '%' . $search . '%');
+        });
     }
+
+    $activeAuctions = $query->orderBy('start_date', 'desc')->get();
+
+    return view("frontend.index", compact('activeAuctions'));
+}
+
     public function auctionDetail(Auction $auction)
     {
         $auction->load('car');

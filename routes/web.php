@@ -28,9 +28,8 @@ require __DIR__ . '/auth.php';
 Auth::routes();
 // after authentication show who page show deciede route  
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Login and Logout Routes...
 
-// admin deshboard route in whitch  isAdmin middleware 
+// admin dashboard route
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     // admin Dashboard routes 
     Route::get('/dashboard', 'Admin\AdminController@Dashboard')->name('dashboard');

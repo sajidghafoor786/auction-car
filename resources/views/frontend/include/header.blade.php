@@ -14,7 +14,7 @@
                 <i class="navbar-toggler-icon fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index.php" title="Products">Home</a>
                     </li>
@@ -35,13 +35,13 @@
                         <a href="{{ route('user.login') }}" class="nav-link text-white me-2 justify-content-start d-flex"><i class="far fa-user me-1"></i> Login</a>
                     @endif
 
-                    <!-- <form action="{{ url('/') }}" method="GET" class="d-flex">
+                    <form action="{{ url('/') }}" method="GET" class="d-flex">
                         <input type="text" placeholder="Search For Products" value="{{ Request::get('Search') }}"
                             class="form-control form-control-sm me-1" name="Search">
                         <button type="submit" class="btn btn-sm btn-dark">
                             <i class="fa fa-search"></i>
                         </button>
-                    </form> -->
+                    </form> 
                 </div>
             </div>
 
