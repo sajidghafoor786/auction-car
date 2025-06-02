@@ -41,7 +41,7 @@ class LoginController extends Controller
     {
         Auth::logout();
         Session::flash('status', 'success');
-        return redirect()->route('user.home')->with('message', 'you are successful logout!');
+        return redirect()->route('frontHome')->with('message', 'you are successful logout!');
     }
     public function profile(){
         $user = Auth::user();

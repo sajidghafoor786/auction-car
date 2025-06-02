@@ -82,17 +82,35 @@
         <li class="menu-item {{ set_active(['admin.carAuction.index', 'admin.carAuction.create']) }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-world"></i>
-                <div data-i18n="Manage Acution" data-label="Manage Auction">Manage Auction</div>
+                <div data-i18n="Manage Acution" data-label="Manage Auction">Manage Auctions</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item {{ set_active(['admin.carAuction.create']) }}">
                     <a href="{{route('admin.carAuction.create') }}" class="menu-link">
-                        <div data-i18n="Add Acution">Add Acution</div>
+                        <div data-i18n="Add Acution">Add Acutions</div>
                     </a>
                 </li>
                 <li class="menu-item {{ set_active(['admin.carAuction.index']) }}">
                     <a href="{{route('admin.carAuction.index' )}}" class="menu-link">
-                        <div data-i18n="List Auction">List Auction</div>
+                        <div data-i18n="List Auction">List Auctions</div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item {{ set_active(['admin.bid.index', 'admin.bid.create']) }}">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-world"></i>
+                <div data-i18n="Manage Bid" data-label="Manage Auction">Manage Bids</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item {{ set_active(['admin.bid.create']) }}">
+                    <a href="{{route('admin.bid.create') }}" class="menu-link">
+                        <div data-i18n="Add Bid">Add Bid</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ set_active(['admin.bid.index']) }}">
+                    <a href="{{route('admin.bid.index' )}}" class="menu-link">
+                        <div data-i18n="List Bid">List Bid</div>
                     </a>
                 </li>
             </ul>

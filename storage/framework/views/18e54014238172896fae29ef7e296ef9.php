@@ -1,1 +1,0 @@
-<?php /**PATH C:\xampp\htdocs\laravel2\resources\views/user/Doctor.blade.php ENDPATH**/ ?>

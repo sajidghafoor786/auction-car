@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('admin.layout.app')
 
 @section('styles')
 @endsection
@@ -9,7 +9,7 @@
         </h4>
         <div class="row mb-2">
             <div class="col-lg-12">
-                <a href="{{ route('createUser') }}" class="btn btn-primary float-end">Add bid</a>
+                <a href="{{ route('admin.bid.create') }}" class="btn btn-primary float-end">Add bid</a>
             </div>
         </div>
         <div class="card p-3">
@@ -21,7 +21,7 @@
                             <th>Car Name</th>
                             <th>Bidder</th>
                             <th>Bid Amount (PKR)</th>
-                            <th>Bid Time</th>
+                            {{-- <th>Bid Time</th> --}}
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -33,7 +33,7 @@
                                 <td>{{ $bid->car->name ?? 'Unknown car' }}</td>
                                 <td>{{ $bid->user->name ?? 'Unknown User' }}</td>
                                 <td>{{ number_format($bid->bid_amount) }}</td>
-                                <td>{{ $bid->created_at->format('d M Y, h:i A') }}</td>
+                                {{-- <td>{{ $bid->created_at->format('d M Y, h:i A') }}</td> --}}
                                 <td>
                                     @if ($bid->auction->end_date < now())
                                         @if (isset($endedAuctions[$bid->auction_id]) && $endedAuctions[$bid->auction_id] == $bid->bid_amount)
@@ -98,7 +98,7 @@
 
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('deleteUser') }}",
+                        url: "{{ url('admin/bids') }}/" + carId" + '/delete',
                         data: {
                             _token: $('meta[name="csrf-token"]').attr('content'),
                             'user_id': userId
@@ -128,7 +128,7 @@
 
                     $.ajax({
                         method: "POST",
-                        url: "{{ route('changeStatus') }}",
+                        url: "{{ route('admin.bid.changeStatus') }}",
                         data: {
                             _token: $('meta[name="csrf-token"]').attr('content'),
                             'status': status,

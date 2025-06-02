@@ -61,14 +61,15 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
     Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
     // create auction route 
-    Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
-    Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
-    Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
-    Route::get('auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
-    Route::post('car-auctions/{auction}/update', 'Admin\AuctionController@update')->name('carAuction.update');
-    Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
-    Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
-    Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
+    Route::get('bids', 'Admin\BidController@index')->name('bid.index');
+    Route::get('bids/create', 'Admin\BidController@create')->name('bid.create');
+    Route::post('bids/store', 'Admin\BidController@store')->name('bid.store');
+    Route::get('auctions/{auction}/edit', 'Admin\BidController@edit')->name('bid.edit');
+    Route::post('bids/{auction}/update', 'Admin\BidController@update')->name('bid.update');
+    Route::get('bids/{auction}', 'Admin\BidController@show')->name('bid.show');
+    Route::delete('bids/{auction}/delete', 'Admin\BidController@destroy')->name('bid.delete');
+    Route::post('bids/status', 'Admin\BidController@status')->name('bid.changeStatus');
+    Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('bid.changeStatus');
 });
 
 // all frontend route define here
@@ -85,12 +86,12 @@ Route::group(['prefix' => 'account'], function () {
     // this is authenticated route
     Route::group(['middleware' => 'auth'], function () {
         // this route after authenticated accessable
-        Route::get('/logout', [LoginController::class, 'LogOut'])->name('user.logout');
-        Route::get('/profile', [LoginController::class, 'profile'])->name('user.profile');
-        Route::post('/profile', [LoginController::class, 'profileUpdate'])->name('user.profileUpdate');
+        Route::get('/logout', 'LoginController@LogOut')->name('user.logout');
+        Route::get('/profile', 'LoginController@profile')->name('user.profile');
+        Route::post('/profile', 'LoginController@profileUpdate')->name('user.profileUpdate');
         // reset password route
-        Route::get('/reset-password', [LoginController::class, 'resetFormShow'])->name('user.resetFormShow');
-        Route::post('/reset-password', [LoginController::class, 'resetPassword'])->name('user.reset-password');
+        Route::get('/reset-password', 'LoginController@resetFormShow')->name('user.resetFormShow');
+        Route::post('/reset-password', 'LoginController@resetPassword')->name('user.reset-password');
         // auction route for after auth access login required
         Route::get('/auction-detail/{auction}', 'FrontController@auctionDetail')->name('auctionDetail');
         Route::post('/auction-bid', 'FrontController@auctionAddBid')->name('add-bid');
@@ -102,5 +103,5 @@ Route::group(['prefix' => 'account'], function () {
 //     return view('frontend.pages.auction');
 // })->name('user.home');
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
-Route::get('/ajax-search-auctions','FrontController@ajaxHomeSearch')->name('ajax.search.auctions');
-Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');
+Route::get('/ajax-search-auctions', 'FrontController@ajaxHomeSearch')->name('ajax.search.auctions');
+// Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');
