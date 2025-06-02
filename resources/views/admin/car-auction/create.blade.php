@@ -64,9 +64,6 @@
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
-
-
-
                         <div class="col-sm-6">
                             <label class="form-label">Select Status <span class="steric">*</span></label>
                             <select name="status" class="form-control {{ $errors->has('status') ? 'is-invalid' : '' }}">
@@ -93,6 +90,6 @@
 
 @section('script')
 <script>
-  
+
 </script>
 @endsection

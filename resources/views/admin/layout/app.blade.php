@@ -226,6 +226,9 @@
             background-color: #dc3545 !important;
             /* Red color for delete */
         }
+        .list-unstyled li{
+            margin-bottom: 15px;
+        }
     </style>
     @yield('styles')
 </head>

@@ -30,7 +30,7 @@
                     <ul>
                         <li><a href="<?php echo e(route('user.login')); ?>" title="Sell">Login</a></li>
                         <li><a href="<?php echo e(route('user.register')); ?>" title="Advertise">Register</a></li>
-                        <li><a href="<?php echo e(route('user.MyOrder')); ?>" title="Contact Us">My Orders</a></li>
+                        <li><a href="" title="Contact Us">My Orders</a></li>
                     </ul>
                 </div>
             </div>

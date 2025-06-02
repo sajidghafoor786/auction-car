@@ -2,33 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers;
-// user controller start 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\user\auth\LoginController;
-use App\Http\Controllers\user\auth\RegisterController;
 
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/test', function () {
-//     OrderEmailSend(58);
-// });
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-require __DIR__ . '/auth.php';
-Auth::routes();
-// after authentication show who page show deciede route  
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
+// admin login route 
+Route::get('/admin/login', 'Admin\AuthController@adminLoginPage')->name('loginPage');
+Route::post('/login', 'Admin\AuthController@login')->name('admin.login');
 // admin dashboard route
 Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function () {
     // admin Dashboard routes 
@@ -42,7 +21,7 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('/view/{id}', 'Admin\AdminController@show')->name('viewUser');
     Route::post('/delete', 'Admin\AdminController@destroy')->name('deleteUser');
     Route::post('/status', 'Admin\AdminController@status')->name('changeStatus');
-    // create auction car route 
+    //  auction car route 
     Route::get('cars', 'Admin\CarController@index')->name('cars.index');
     Route::get('cars/create', 'Admin\CarController@create')->name('cars.create');
     Route::post('cars', 'Admin\CarController@store')->name('cars.store');
@@ -51,8 +30,8 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::post('cars/update', 'Admin\CarController@update')->name('cars.update');
     Route::delete('cars/{car}', 'Admin\CarController@destroy')->name('cars.destroy');
     Route::post('cars/status', 'Admin\CarController@status')->name('cars.changeStatus');
-    // create auction route 
-  Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
+    //  auction route 
+    Route::get('car-auctions', 'Admin\AuctionController@index')->name('carAuction.index');
     Route::get('car-auctions/create', 'Admin\AuctionController@create')->name('carAuction.create');
     Route::post('car-auctions/store', 'Admin\AuctionController@store')->name('carAuction.store');
     Route::get('car-auctions/{auction}/edit', 'Admin\AuctionController@edit')->name('carAuction.edit');
@@ -60,16 +39,14 @@ Route::middleware(['isAdmin'])->prefix('admin')->name('admin.')->group(function 
     Route::get('car-auctions/{auction}', 'Admin\AuctionController@show')->name('carAuction.show');
     Route::delete('car-auctions/{auction}/delete', 'Admin\AuctionController@destroy')->name('carAuction.delete');
     Route::post('car-auctions/status', 'Admin\AuctionController@status')->name('carAuction.changeStatus');
-    // create auction route 
+    //  bids route 
     Route::get('bids', 'Admin\BidController@index')->name('bid.index');
     Route::get('bids/create', 'Admin\BidController@create')->name('bid.create');
     Route::post('bids/store', 'Admin\BidController@store')->name('bid.store');
-    Route::get('bids/{auction}/edit', 'Admin\BidController@edit')->name('bid.edit');
-    Route::post('bids/{auction}/update', 'Admin\BidController@update')->name('bid.update');
-    Route::get('bids/{auction}', 'Admin\BidController@show')->name('bid.show');
-    Route::delete('bids/{auction}/delete', 'Admin\BidController@destroy')->name('bid.delete');
-    Route::post('bids/status', 'Admin\BidController@status')->name('bid.changeStatus');
-
+    Route::get('bids/{id}', 'Admin\BidController@show')->name('bid.show');
+    // reset password
+    Route::get('/change-password', 'Admin\AuthController@adminPasswordPage')->name('adminPasswordPage');
+    Route::post('/password', 'Admin\AuthController@adminPassword')->name('passwordAdmin');
 });
 
 // all frontend route define here
@@ -98,10 +75,7 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('/auction-biding-history', 'FrontController@myBidHistory')->name('bidding.history');
     });
 });
-// show defalte user page  
-// Route::get('/details', function () {
-//     return view('frontend.pages.auction');
-// })->name('user.home');
+
 Route::get('/', 'FrontController@frontHome')->name('frontHome');
 Route::get('/ajax-search-auctions', 'FrontController@ajaxHomeSearch')->name('ajax.search.auctions');
 // Route::get('/Thanks/{order}', [CheckOutController::class, 'Thankyou'])->name('user.Thankyou');

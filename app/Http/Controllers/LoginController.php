@@ -29,8 +29,7 @@ class LoginController extends Controller
         } else {
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
                 Session::flash('status', 'success');
-                return redirect()->intended(RouteServiceProvider::HOME)->with('message', 'User created successfully!');
-            
+                return redirect()->route('frontHome')->with('message', 'User created successfully!');
             } else {
                 return redirect()->back()->withErrors($validator)->withInput($request->only('email'));
             }
@@ -43,49 +42,52 @@ class LoginController extends Controller
         Session::flash('status', 'success');
         return redirect()->route('frontHome')->with('message', 'you are successful logout!');
     }
-    public function profile(){
+    public function profile()
+    {
         $user = Auth::user();
-        return view('frontend.account.profile' ,compact('user'));
+        return view('frontend.account.profile', compact('user'));
     }
-    public function profileUpdate( Request $request){
-       $user = User::find($request->id);
-         $validator = Validator::validate($request->all(), [
+    public function profileUpdate(Request $request)
+    {
+        $user = User::find($request->id);
+        $validator = Validator::validate($request->all(), [
             'name' => 'required',
             'phone' => 'required|numeric|digits_between:11,15|unique:users',
-         ]);
+        ]);
         // dd($request->all());
         $data = [
             'name'      => $request->input('name'),
             'phone'     => $request->input('phone'),
         ];
-         $user->update($data);
+        $user->update($data);
         return redirect()->back()->with([
             'message' => 'User updated successfully',
             'status' => 'success'
         ]);
     }
-    public function resetFormShow(Request $request){
+    public function resetFormShow(Request $request)
+    {
         $user = Auth::user();
-        return view('frontend.account.reset-password',compact('user'));
-
+        return view('frontend.account.reset-password', compact('user'));
     }
-    public function resetPassword(Request $request){
-         $request->validate([
-        'current_password' => 'required',
-        'new_password' => 'required|min:8|confirmed',
-    ]);
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
 
-    $user = auth()->user();
+        $user = auth()->user();
 
-    // Check current password
-    if (!Hash::check($request->current_password, $user->password)) {
-        return back()->withErrors(['current_password' => 'Current password is incorrect']);
-    }
+        // Check current password
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect']);
+        }
 
-    // Update password
-    $user->password = Hash::make($request->new_password);
-    $user->save();
+        // Update password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
 
-    return back()->with(['message'=> 'Password updated successfully.' , 'status' => 'success']);
+        return back()->with(['message' => 'Password updated successfully.', 'status' => 'success']);
     }
 }

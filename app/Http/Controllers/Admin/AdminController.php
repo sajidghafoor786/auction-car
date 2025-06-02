@@ -30,7 +30,13 @@ class AdminController extends Controller
         $totalBidsToday = Bid::whereDate('created_at', Carbon::today())->count();
         $totalBids = Bid::count();
 
-        return view('admin.dashboard', compact( 'totalUsers', 'totalAdmins', 'totalCars', 'totalAuctionCars', 'totalBidsToday', 'totalBids'
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'totalAdmins',
+            'totalCars',
+            'totalAuctionCars',
+            'totalBidsToday',
+            'totalBids'
         ));
     }
 
@@ -159,4 +165,5 @@ class AdminController extends Controller
             'message' => 'Status changed successfully.'
         ]);
     }
+  
 }

@@ -34,7 +34,7 @@
                     @else
                         <a href="{{ route('user.login') }}"
                             class="nav-link text-white me-2 justify-content-start d-flex"><i
-                                class="far fa-user me-1"></i> Login</a>
+                                class="far fa-user me-2 mt-1"></i> Login</a>
                     @endif
 
                     <form action="{{ url('/') }}" method="GET" class="d-flex search-form w-50">
