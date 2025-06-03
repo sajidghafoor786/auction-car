@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('user_type')->default('0');
-            $table->string('status')->default('1');
             $table->string('email')->unique();
+            $table->string('status')->default('1');
+            $table->string('phone')->default('1');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->string('profile_photo', 2048)->nullable();
             $table->timestamps();
         });
     }

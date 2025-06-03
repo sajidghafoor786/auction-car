@@ -1,45 +1,14 @@
 <?php return array (
-  'hardevine/shoppingcart' => 
+  'barryvdh/laravel-dompdf' => 
   array (
     'aliases' => 
     array (
-      'Cart' => 'Gloudemans\\Shoppingcart\\Facades\\Cart',
+      'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
+      'Pdf' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
     'providers' => 
     array (
-      0 => 'Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider',
-    ),
-  ),
-  'jenssegers/agent' => 
-  array (
-    'aliases' => 
-    array (
-      'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
-    ),
-    'providers' => 
-    array (
-      0 => 'Jenssegers\\Agent\\AgentServiceProvider',
-    ),
-  ),
-  'laravel/breeze' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Breeze\\BreezeServiceProvider',
-    ),
-  ),
-  'laravel/fortify' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Fortify\\FortifyServiceProvider',
-    ),
-  ),
-  'laravel/jetstream' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Laravel\\Jetstream\\JetstreamServiceProvider',
+      0 => 'Barryvdh\\DomPDF\\ServiceProvider',
     ),
   ),
   'laravel/sail' => 
@@ -68,17 +37,6 @@
     'providers' => 
     array (
       0 => 'Laravel\\Ui\\UiServiceProvider',
-    ),
-  ),
-  'livewire/livewire' => 
-  array (
-    'aliases' => 
-    array (
-      'Livewire' => 'Livewire\\Livewire',
-    ),
-    'providers' => 
-    array (
-      0 => 'Livewire\\LivewireServiceProvider',
     ),
   ),
   'nesbot/carbon' => 

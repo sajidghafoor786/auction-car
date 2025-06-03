@@ -24,7 +24,7 @@ class CloseExpiredAuctions extends Command
 
         foreach ($expiredAuctions as $auction) {
             $auction->status = 'closed';
-            $auction->save();
+            $auction->update();
 
             $highestBid = $auction->bids()->first();
 
@@ -52,7 +52,7 @@ class CloseExpiredAuctions extends Command
                 }
             }
         }
-
+        
         $this->info('Expired auctions processed successfully.');    
     }
 }
