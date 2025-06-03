@@ -79,3 +79,136 @@ span.invalid-feedback.d-block{ float: left;}
 
 
 .menu-item.active svg path{ fill: #696cff;}
+
+  .loader-wrapper {
+            position: fixed;
+            z-index: 999999;
+            background: #3f3f3f59;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .loader-wrapper .theme-loader {
+            height: 100px;
+            width: 100px;
+            position: relative;
+        }
+
+        .loader-wrapper .theme-loader .loader-p {
+            border: 0 solid transparent;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            top: calc(50vh - 75px);
+            left: calc(50vw - 75px);
+        }
+
+        .loader-wrapper .theme-loader .loader-p:before {
+            content: "";
+            border: 1em solid #14bedb;
+            border-radius: 50%;
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-animation: loader 2s linear infinite;
+            animation: loader 2s linear infinite;
+            opacity: 0;
+            -webkit-animation-delay: 0.5s;
+            animation-delay: 0.5s;
+        }
+
+        .app-brand.demo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .loader-wrapper .theme-loader .loader-p:after {
+            content: "";
+            border: 1em solid #14bedb;
+            border-radius: 50%;
+            width: inherit;
+            height: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            -webkit-animation: loader 2s linear infinite;
+            animation: loader 2s linear infinite;
+            opacity: 0;
+        }
+
+        @-webkit-keyframes loader {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        @keyframes loader {
+            0% {
+                -webkit-transform: scale(0);
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Customize toastr notification styles */
+        .toast {
+
+            margin-top: 10px !important;
+            background-color: #4CAF50 !important;
+            /* Set your desired background color */
+            color: #fff !important;
+            /* Set the text color to ensure visibility */
+            /* white-space: nowrap !important; 
+             overflow: hidden !important; */
+        }
+
+        .toast-error {
+            background-color: #dc3545 !important;
+            color: #fff !important;
+            /* width: 370px !important; */
+        }
+
+        .toast-info {
+            background-color: #17a2b8 !important;
+            color: #fff !important;
+            /* Set the text color to ensure visibility */
+            /* white-space: nowrap !important;
+            overflow: hidden !important; */
+        }
+
+        .toast-warning {
+            background-color: #dc3545 !important;
+            /* Red color for delete */
+        }
+        .list-unstyled li{
+            margin-bottom: 15px;
+        }

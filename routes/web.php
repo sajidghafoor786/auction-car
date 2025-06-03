@@ -59,6 +59,12 @@ Route::group(['prefix' => 'account'], function () {
         //    login route 
         Route::get('/login', 'LoginController@login')->name('user.login');
         Route::post('/authenticate-process', 'LoginController@AuthenticateProcess')->name('user.authenticate-process');
+        // forgot password
+        Route::get('/forgot-password', 'ForgotPasswordController@showForgotForm')->name('forgotPage');
+        Route::post('/forgot-password', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+        // reset password 
+        Route::get('/reset-password/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
+        Route::post('/reset-password', 'ResetPasswordController@reset')->name('password.update');
     });
     // this is authenticated route
     Route::group(['middleware' => 'auth'], function () {
