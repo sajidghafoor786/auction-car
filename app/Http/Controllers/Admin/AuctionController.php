@@ -30,7 +30,7 @@ class AuctionController extends Controller
         $validator = Validator::make($request->all(), [
             'car_id' => 'required|exists:cars,id',
             'minimum_bid' => 'required|numeric',
-            'current_bid' => 'required|numeric',
+            'current_bid' => 'nullable|numeric',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);

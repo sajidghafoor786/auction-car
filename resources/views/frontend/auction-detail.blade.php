@@ -67,7 +67,7 @@ Car Auction | Auction Detail
                         <div class="row align-item-center">
                             <div class="col-md-4">
                                 <label class="form-label">Current Maximum Bid</label>
-                                <input type="text" class="form-control" disabled value="{{ $auction->current_bid }}">
+                                <input type="text" class="form-control" disabled value="{{ $auction->current_bid ?? '0'}}">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Your Bid</label>

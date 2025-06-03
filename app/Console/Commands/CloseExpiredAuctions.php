@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
@@ -22,37 +23,44 @@ class CloseExpiredAuctions extends Command
             ->where('end_date', '<=', $now)
             ->get();
 
+
         foreach ($expiredAuctions as $auction) {
             $auction->status = 'closed';
-            $auction->update();
+            $auction->save();
 
             $highestBid = $auction->bids()->first();
+            $car = $auction->car;
 
             // Send winner email
             if ($highestBid) {
                 $pdf = PDF::loadView('emails.auction_winner_pdf', [
                     'auction' => $auction,
-                    'bid' => $highestBid
+                    'bid' => $highestBid,
+                     'car' => $auction->car
                 ]);
 
-                Mail::send('emails.auction_winner', ['auction' => $auction], function ($message) use ($highestBid, $pdf) {
+                Mail::send('emails.auction_winner', [
+                    'auction' => $auction,
+                    'bid' => $highestBid,
+                    'car' => $auction->car
+                ], function ($message) use ($highestBid, $pdf) {
                     $message->to($highestBid->user->email)
                         ->subject('🎉 Congratulations! You won the auction')
                         ->attachData($pdf->output(), 'auction-details.pdf');
                 });
 
-                
+
                 $otherBidders = $auction->bids()->where('user_id', '!=', $highestBid->user_id)->get();
 
                 foreach ($otherBidders as $bid) {
-                    Mail::send('emails.auction_loser', ['auction' => $auction], function ($message) use ($bid) {
+                    Mail::send('emails.auction_loser', ['auction' => $auction , 'car' => $auction->car], function ($message) use ($bid) {
                         $message->to($bid->user->email)
                             ->subject('Auction Result: You didn’t win this time');
                     });
                 }
             }
         }
-        
-        $this->info('Expired auctions processed successfully.');    
+
+        $this->info('Expired auctions processed successfully.');
     }
 }

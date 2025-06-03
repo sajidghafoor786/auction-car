@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-<html
-    lang="en"
-    class="light-style layout-menu-fixed"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="{{ asset('assets') }} /"
-    data-template="vertical-menu-template-free">
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-path="{{ asset('assets') }} /" data-template="vertical-menu-template-free">
 
 <head>
     <meta charset="utf-8" />
-    <meta
-        name="viewport"
+    <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -27,7 +21,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
     <!-- Icons. Uncomment required icon fonts -->
@@ -40,8 +35,10 @@
 
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/core.css') }}"
+        class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/css/theme-default.css') }}"
+        class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('admin/assets/css/demo.css') }}" />
 
     <!-- Vendors CSS -->
@@ -53,7 +50,8 @@
 
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
 
-    <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('admin/assets/vendor/libs/animate-css/animate.css') }}" />
 
@@ -82,10 +80,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/css/admin-style.css') }}">
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/css/tempus-dominus.min.css"
+        crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
     <script src="{{ asset('admin/assets/plugins/daterangepicker/daterangepicker.js') }}"></script>
@@ -138,7 +140,8 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@eonasdan/tempus-dominus@6.9.4/dist/js/tempus-dominus.min.js"
+        crossorigin="anonymous"></script>
 
     <script src="{{ asset('admin/assets/vendor/js/bootstrap.js') }}"></script>
     <script src="{{ asset('admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
@@ -167,13 +170,14 @@
 
 
 
-    <script type="text/javascript" src="{{asset('admin/assets/vendor/libs/moment/moment.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('admin/assets/vendor/libs/moment/moment.js') }}"></script>
 
-    <script type="text/javascript" src="{{asset('admin/assets/vendor/libs/flatpickr/flatpickr.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('admin/assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
 
-    <script type="text/javascript" src="{{asset('admin/assets/vendor/libs/pickr/pickr.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('admin/assets/vendor/libs/pickr/pickr.js') }}"></script>
 
-    <script type="text/javascript" src="{{asset('admin/assets/vendor/libs/jquery-repeater/jquery-repeater.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('admin/assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}">
+    </script>
 
     <!-- Main JS -->
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
@@ -197,23 +201,21 @@
         $('.loader-wrapper').fadeOut('slow', function() {
             $(this).hide();
         });
-
-        function markAllAsRead() {
-
-            $.ajax({
-                method: "POST",
-                url: '#',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(response) {
-                    if (response.status == 1) {
-                        getNotifications();
-                    }
+        $(function() {
+            $('.date_time').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: true,
+                timePicker24Hour: false,
+                timePickerSeconds: false,
+                autoUpdateInput: true,
+                locale: {
+                    format: 'YYYY-MM-DD HH:mm'
                 }
             });
-        }
+        });
     </script>
+
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -254,8 +256,8 @@
             }
 
             // Show Toastr message if session message exists
-            @if(Session::has('message') && Session::has('status'))
-            showToast("{{ Session::get('status') }}", "{{ Session::get('message') }}");
+            @if (Session::has('message') && Session::has('status'))
+                showToast("{{ Session::get('status') }}", "{{ Session::get('message') }}");
             @endif
         });
     </script>

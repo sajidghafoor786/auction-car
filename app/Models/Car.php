@@ -17,4 +17,8 @@ class Car extends Model
         'image',
         'status',
     ];
+    public function auctions()
+{
+    return $this->hasMany(Auction::class);
+}
 }

@@ -30,7 +30,7 @@
                     @foreach ($bids as $index => $bid)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $bid->car->name ?? 'Unknown car' }}</td>
+                        <td>{{ $bid->auction->car->name ?? 'Unknown car' }}</td>
                         <td>{{ $bid->user->name ?? 'Unknown User' }}</td>
                         <td>{{ number_format($bid->bid_amount) }}</td>
                         {{-- <td>{{ $bid->created_at->format('d M Y, h:i A') }}</td> --}}

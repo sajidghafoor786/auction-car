@@ -44,14 +44,14 @@
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Current Bid (PKR) <span class="steric"></span></label>
-                            <input type="number" name="current_bid" class="form-control {{ $errors->has('current_bid') ? 'is-invalid' : '' }}" placeholder="Enter Starting Price" value="{{ old('current_bid') }}">
+                            <input type="number" name="current_bid" class="form-control {{ $errors->has('current_bid') ? 'is-invalid' : '' }}" placeholder="Enter Current Price" value="{{ old('current_bid') }}">
                             @error('current_bid')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-sm-6">
                             <label class="form-label">Start Date <span class="steric">*</span></label>
-                            <input type="datetime-local" name="start_date" class="form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" value="{{ old('start_date') }}">
+                            <input type="text" id="" name="start_date" class="date_time form-control {{ $errors->has('start_date') ? 'is-invalid' : '' }}" value="{{ old('start_date') }}">
                             @error('start_date')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -59,7 +59,7 @@
 
                         <div class="col-sm-6">
                             <label class="form-label">End Date <span class="steric">*</span></label>
-                            <input type="datetime-local" name="end_date" class="form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" value="{{ old('end_date') }}">
+                            <input type="text" id="" name="end_date" class="date_time form-control {{ $errors->has('end_date') ? 'is-invalid' : '' }}" value="{{ old('end_date') }}">
                             @error('end_date')
                             <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

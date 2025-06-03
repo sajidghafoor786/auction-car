@@ -33,8 +33,8 @@
                         <td>{{ $auction->id }}</td>
                         <td>{{ $auction->car->name ?? 'N/A' }}</td>
                         <td>{{ $auction->minimum_bid }} / PKR</td>
-                        <td>{{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y') }}</td>
-                        <td>{{ \Carbon\Carbon::parse($auction->end_date)->format('d M Y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($auction->start_date)->format('d M Y, h:i A') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($auction->end_date)->format('d M Y, h:i A') }}</td>
                         <td class="text-center">
                             @if($auction->status == 'active')
                                 <a href="javascript:void(0);" onclick="changeStatus('closed', {{ $auction->id }});" class="badge bg-success">Active</a>
