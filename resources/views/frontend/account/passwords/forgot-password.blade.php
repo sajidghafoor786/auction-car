@@ -19,12 +19,18 @@
             <div class="offset-5 col-lg-4">
             </div>
             <div class="login-form">
+                @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <form role="form" class="text-start" method="POST" action="{{ route('password.email') }}">
                     @csrf
                     <div class="mb-3">
                         <label for="email">Email</label>
                         <input type="email" name="email" id="email"
-                            class="form-control @error('email') is-invalid @enderror" required placeholder="Enter Your Email">
+                            class="form-control @error('email') is-invalid @enderror" required
+                            placeholder="Enter Your Email">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

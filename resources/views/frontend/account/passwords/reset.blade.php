@@ -8,35 +8,10 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="pinterest" content="nopin" />
-
-    <meta property="og:locale" content="en_AU" />
-    <meta property="og:type" content="website" />
-    <meta property="fb:admins" content="" />
-    <meta property="fb:app_id" content="" />
-    <meta property="og:site_name" content="" />
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:image:width" content="" />
-    <meta property="og:image:height" content="" />
-    <meta property="og:image:alt" content="" />
-
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:site" content="" />
-    <meta name="twitter:description" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:image:alt" content="" />
-    <meta name="twitter:card" content="summary_large_image" />
-
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend-asset/css/slick.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset(' frontend-asset/css/slick-theme.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset(' frontend-asset/css/video-js.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('frontend-asset/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/slick.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset(' assets/css/slick-theme.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset(' assets/css/video-js.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,10 +59,6 @@
     <section class=" section-10 mt-5">
         <div class="container">
             <div class="offset-5 col-lg-4">
-
-                <img src="{{ asset('admin-2/assets-2/logo/logo-2.png') }}"
-                    style="height: 150px; width: 200px;object-fit: cover; ">
-
             </div>
             <div class="login-form">
                 @if (session('status'))

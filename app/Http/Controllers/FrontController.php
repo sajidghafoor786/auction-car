@@ -59,38 +59,45 @@ class FrontController extends Controller
         ]);
 
         $user = Auth::user();
-        $auction = Auction::find($request->auction_id);
 
-        if (!$auction) {
-            return Response::json(['status' => 'error', 'message' => 'Auction not found.'], 404);
-        }
+        return DB::transaction(function () use ($request, $user) {
+            // i use lockForupdate function for avoid same time biding conflict 
+            $auction = Auction::where('id', $request->auction_id)->lockForUpdate()->first();
 
-        // Check latestBid 
-        $latestBid = Bid::where('auction_id', $auction->id)->orderBy('id', 'desc')->first();
-        if (!$latestBid) {
-            if ($request->bid_amount < $auction->minimum_bid) {
-                return Response::json(['status' => 'error', 'message' => 'Your bid must be at least the minimum bid.'], 422);
-            }
-        } else {
-            if ($request->bid_amount <= $latestBid->bid_amount) {
-                return Response::json(['status' => 'error', 'message' => 'Please enter an amount higher than the current maximum bid.'], 422);
+            if (!$auction) {
+                return Response::json(['status' => 'error', 'message' => 'Auction not found.'], 404);
             }
 
-            if ($latestBid->user_id == $user->id) {
-                return Response::json(['status' => 'error', 'message' => 'You already have the highest bid. Wait until someone outbids you.'], 422);
+            $latestBid = Bid::where('auction_id', $auction->id)
+                ->orderBy('id', 'desc')
+                ->lockForUpdate()
+                ->first();
+
+            if (!$latestBid) {
+                if ($request->bid_amount < $auction->minimum_bid) {
+                    return Response::json(['status' => 'error', 'message' => 'Your bid must be at least the minimum bid.'], 422);
+                }
+            } else {
+                if ($request->bid_amount <= $latestBid->bid_amount) {
+                    return Response::json(['status' => 'error', 'message' => 'Please enter an amount higher than the current maximum bid.'], 422);
+                }
+
+                if ($latestBid->user_id == $user->id) {
+                    return Response::json(['status' => 'error', 'message' => 'You already have the highest bid. Wait until someone outbids you.'], 422);
+                }
             }
-        }
 
-        Bid::create([
-            'auction_id' => $auction->id,
-            'user_id' => $user->id,
-            'bid_amount' => $request->bid_amount,
-        ]);
+            Bid::create([
+                'auction_id' => $auction->id,
+                'user_id' => $user->id,
+                'bid_amount' => $request->bid_amount,
+            ]);
 
-        $auction->current_bid = $request->bid_amount;
-        $auction->update();
+            $auction->current_bid = $request->bid_amount;
+            $auction->update();
 
-        return Response::json(['status' => 'success', 'message' => 'Your bid has been placed successfully.']);
+            return Response::json(['status' => 'success', 'message' => 'Your bid has been placed successfully.']);
+        });
     }
     public function myBidHistory(Request $request)
     {

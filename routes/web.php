@@ -64,7 +64,7 @@ Route::group(['prefix' => 'account'], function () {
         Route::post('/forgot-password', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
         // reset password 
         Route::get('/reset-password/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
-        Route::post('/reset-password', 'ResetPasswordController@reset')->name('password.update');
+        Route::post('/reset', 'ResetPasswordController@reset')->name('password.update');
     });
     // this is authenticated route
     Route::group(['middleware' => 'auth'], function () {

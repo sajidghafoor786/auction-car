@@ -26,14 +26,16 @@ class ResetPasswordController extends Controller
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
-                $user->password = Hash::make($request->password);
-                $user->setRememberToken(Str::random(60));
+                $user->password = \Hash::make($request->password);
+                $user->setRememberToken(\Str::random(60));
                 $user->save();
             }
         );
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        if ($status === Password::PASSWORD_RESET) {
+            return redirect()->route('frontHome')->with(['status' => 'success' ,'message' => 'Your password has been successfully updated. You can now log in.']);
+        } else {
+            return back()->withErrors(['message' => 'Failed to reset password. Please try again.' , 'status' => 'error']);
+        }
     }
 }
