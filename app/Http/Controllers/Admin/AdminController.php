@@ -5,20 +5,41 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use app\Models\User;
 use Validator;
 use Illuminate\Support\Facades\Hash;
 use Redirect;
+use App\Models\User;
+use App\Models\Car;
+use App\Models\Auction;
+use App\Models\Bid;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
     /**
      * Display a Dashboard of the resource.
      */
-    public function Dashboard()
+
+
+    public function dashboard()
     {
-        return view("admin.dashboard");
+        $totalUsers = User::where('user_type', '0')->count();
+        $totalAdmins = User::where('user_type', '1')->count();
+        $totalCars = Car::count();
+        $totalAuctionCars = Auction::count();
+        $totalBidsToday = Bid::whereDate('created_at', Carbon::today())->count();
+        $totalBids = Bid::count();
+
+        return view('admin.dashboard', compact(
+            'totalUsers',
+            'totalAdmins',
+            'totalCars',
+            'totalAuctionCars',
+            'totalBidsToday',
+            'totalBids'
+        ));
     }
+
     public function index()
     {
         $users = User::query()
@@ -144,4 +165,5 @@ class AdminController extends Controller
             'message' => 'Status changed successfully.'
         ]);
     }
+  
 }

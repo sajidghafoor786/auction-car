@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Bid;
 
 class User extends Authenticatable
 {
     
     use HasApiTokens;
     use HasFactory;
-    use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
 
@@ -33,10 +32,10 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function order()
-    {
-        return $this->hasMany(Order::class, 'user_id', 'id');
-    }
+  public function bids()
+{
+    return $this->hasMany(Bid::class);
+}
     /**
      * The attributes that should be hidden for serialization.
      *

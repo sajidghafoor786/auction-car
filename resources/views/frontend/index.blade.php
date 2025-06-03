@@ -20,7 +20,6 @@
                             <h1 class="display-4 text-white mb-3">Live Car Auctions</h1>
                             <p class="mx-md-5 px-5">Bid on premium cars in real-time and drive home your dream ride at
                                 unbeatable prices.</p>
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Browse Auctions</a>
                         </div>
                     </div>
                 </div>
@@ -38,7 +37,6 @@
                             <h1 class="display-4 text-white mb-3">Verified Vehicles Only</h1>
                             <p class="mx-md-5 px-5">Every car is inspected and verified before listing. No surprises—only
                                 trusted deals.</p>
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">View Verified Cars</a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +54,6 @@
                             <h1 class="display-4 text-white mb-3">Winning Deals Daily</h1>
                             <p class="mx-md-5 px-5">Don't miss your chance! New auctions open daily. Be the highest bidder
                                 and win!</p>
-                            <a class="btn btn-outline-light py-2 px-4 mt-3" href="#">Start Bidding</a>
                         </div>
                     </div>
                 </div>

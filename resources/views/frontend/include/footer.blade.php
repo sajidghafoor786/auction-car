@@ -15,11 +15,11 @@
                 <div class="footer-card">
                     <h3>Important Links</h3>
                     <ul>
-                        <li><a href="about-us.php" title="About">About</a></li>
-                        <li><a href="contact-us.php" title="Contact Us">Contact Us</a></li>
-                        <li><a href="#" title="Privacy">Privacy</a></li>
-                        <li><a href="#" title="Privacy">Terms & Conditions</a></li>
-                        <li><a href="#" title="Privacy">Refund Policy</a></li>
+                        <li><a href="{{url('/')}}" title="About">Home</a></li>
+                        <li><a href="{{ route('privacy') }}" title="Privacy">Privacy</a></li>
+                        <li><a href="{{ route('terms') }}" title="Privacy">Terms & Conditions</a></li>
+                        <li><a href="{{ route('contact') }}" title="Privacy">Contact Us</a></li>
+                     
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     <ul>
                         <li><a href="{{ route('user.login') }}" title="Sell">Login</a></li>
                         <li><a href="{{ route('user.register') }}" title="Advertise">Register</a></li>
-                        <li><a href="" title="Contact Us">My Orders</a></li>
+                        <li><a href="{{ route('bidding.history') }}" title="Contact Us">My Biding</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     <div class="copy-right text-center">
-                        <p>© Copyright 2025 Car Auction. All Rights Reserved</p>
+                        <p>© Copyright 2022 sajid ghafoor. All Rights Reserved</p>
                     </div>
                 </div>
             </div>

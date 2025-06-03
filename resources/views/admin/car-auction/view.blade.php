@@ -67,7 +67,7 @@
 
                             <li class="mb-3">
                                 <span class="fw-medium me-2">Created At:</span>
-                                <span>{{ $auction->created_at->format('d M Y h:i A') }}</span>
+                                <span>{{  \Carbon\Carbon::parse($auction->created_at)->format('d M Y h:i A')}}</span>
                             </li>
                         </ul>
                     </div>
