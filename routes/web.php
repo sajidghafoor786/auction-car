@@ -10,6 +10,8 @@ use App\Http\Controllers;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\user\auth\LoginController;
 use App\Http\Controllers\user\auth\RegisterController;
+use Illuminate\Support\Facades\Mail;
+
 
 
 Route::get('/dashboard', function () {

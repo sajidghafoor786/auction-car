@@ -6,9 +6,9 @@
             <script>
                 document.write(new Date().getFullYear());
             </script>
-            Hajjfinders. All Rights Reserved | Designed & Developed by
-            <a href="https://www.skynetsolutionz.com/" target="_blank" style="color:#26A4DD; text-decoration:none">
-                Skynet Solutionz
+            Car Auction . All Rights Reserved | Designed & Developed by
+            <a href="https://github.com/sajidghafoor786/auction-car" target="_blank" style="color:#26A4DD; text-decoration:none">
+              Sajid Ghafoor
             </a>
         </div>
     </div>
