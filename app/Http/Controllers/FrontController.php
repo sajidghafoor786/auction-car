@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class FrontController extends Controller
@@ -102,7 +103,10 @@ class FrontController extends Controller
     public function myBidHistory(Request $request)
     {
         $user = auth()->user();
-
+        if ($user == null) {
+            Session::flash('status', 'error');
+            return redirect()->back()->with('message', 'Please login first view your Biding');
+        }
         $bids = Bid::with(['auction.car'])
             ->where('user_id', $user->id)
             ->orderBy('created_at', 'desc')

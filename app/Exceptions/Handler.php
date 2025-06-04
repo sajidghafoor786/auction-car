@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Facades\Session;
 
 class Handler extends ExceptionHandler
 {
@@ -26,5 +28,19 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'Unauthenticated.'], 401);
+        }
+        if ($request->is('logout') || $request->routeIs('user.logout')) {
+           Session::flash('status', 'success');
+        return redirect()->route('frontHome')->with('message', 'you are successful logout!');
+        }
+        Session::flash('status', 'error');
+        Session::flash('message', 'Please login to access this page.');
+
+        return redirect()->route('user.login');
     }
 }

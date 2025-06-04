@@ -27,11 +27,12 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->only('email'));
         } else {
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 Session::flash('status', 'success');
                 return redirect()->route('frontHome')->with('message', 'User created successfully!');
             } else {
-                return redirect()->back()->withErrors($validator)->withInput($request->only('email'));
+                Session::flash('status', 'error');
+                return redirect()->back()->with('message', 'The email address is not registered.');
             }
             // return redirect()->route('user.login')->with('message', 'User created successfully!');
         }
