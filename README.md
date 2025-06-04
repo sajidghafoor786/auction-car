@@ -26,6 +26,6 @@ p: user12345
 
 
 ******** open terminal ******** 
-cron_runner.bit 
+cron_runner.bat 
 run this command for run cron job automatically in back ground
 
